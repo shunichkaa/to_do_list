@@ -1,7 +1,3 @@
-.App {
-  padding: 30px;
-  display: flex;
-}
 
 .App>div{
   margin: 50px;
@@ -16,9 +12,9 @@
 }
 
 .active-filter {
-  background-color: rgba(127, 255, 212, 0.4);
+  background-color: rgba(160, 251, 63, 0.43);
 }
 
 .is-done {
- opacity: 0.5;
+  opacity: 0.5;
 }

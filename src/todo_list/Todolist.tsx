@@ -1,29 +1,11 @@
-import React, { ChangeEvent, useState, KeyboardEvent, useCallback } from 'react';
-import { FilterValues } from "../App";
+import React, { ChangeEvent, useState, KeyboardEvent } from 'react';
+import { FilterValues, Task } from "../App";
 
-const MAX_TASK_TITLE_LENGTH = 100;
-
-interface TaskType {
-    id: string;
-    title: string;
-    isDone: boolean;
-}
-
-interface TaskItemProps {
-    task: TaskType;
+type TaskItemProps = {
+    task: Task;
     onStatusChange: (taskId: string, isDone: boolean) => void;
     onRemove: (taskId: string) => void;
-}
-
-interface TodolistProps {
-    title: string;
-    tasks: TaskType[];
-    removeTask: (taskId: string) => void;
-    changeFilter: (value: FilterValues) => void;
-    addTask: (title: string) => void;
-    changeTaskStatus: (taskId: string, isDone: boolean) => void;
-    filter: FilterValues;
-}
+};
 
 const TaskItem: React.FC<TaskItemProps> = ({ task, onStatusChange, onRemove }) => (
     <li className={task.isDone ? "is-done" : ""}>
@@ -35,10 +17,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, onStatusChange, onRemove }) =
             />
             <span>{task.title}</span>
         </label>
-        <button
-            onClick={() => onRemove(task.id)}
-            aria-label={`Удалить задачу ${task.title}`}
-        >x</button>
+        <button onClick={() => onRemove(task.id)}>x</button>
     </li>
 );
 
@@ -47,34 +26,39 @@ type FilterButtonsProps = {
     onFilterChange: (filter: FilterValues) => void;
 };
 
-const FilterButtons: React.FC<FilterButtonsProps> = ({ filter, onFilterChange }) => {
-    const handleFilterChange = useCallback((filter: FilterValues) => () => {
-        onFilterChange(filter);
-    }, [onFilterChange]);
+const FilterButtons: React.FC<FilterButtonsProps> = ({ filter, onFilterChange }) => (
+    <div>
+        <button className={filter === "all" ? "active-filter" : ""} onClick={() => onFilterChange("all")}>All</button>
+        <button className={filter === "active" ? "active-filter" : ""} onClick={() => onFilterChange("active")}>Active</button>
+        <button className={filter === "completed" ? "active-filter" : ""} onClick={() => onFilterChange("completed")}>Completed</button>
+    </div>
+);
 
-    return (
-        <div>
-            <button className={filter === "all" ? "active-filter" : ""} onClick={handleFilterChange("all")}>All</button>
-            <button className={filter === "active" ? "active-filter" : ""} onClick={handleFilterChange("active")}>Active</button>
-            <button className={filter === "completed" ? "active-filter" : ""} onClick={handleFilterChange("completed")}>Completed</button>
-        </div>
-    );
+type TodolistProps = {
+    title: string;
+    tasks: Task[];
+    removeTask: (taskId: string) => void;
+    changeFilter: (value: FilterValues) => void;
+    addTask: (title: string) => void;
+    changeTaskStatus: (taskId: string, isDone: boolean) => void;
+    filter: FilterValues;
 };
 
 export const Todolist: React.FC<TodolistProps> = ({
-    title,
-    tasks,
-    removeTask,
-    changeFilter,
-    addTask,
-    changeTaskStatus,
-    filter
-}) => {
+                                                      title,
+                                                      tasks,
+                                                      removeTask,
+                                                      changeFilter,
+                                                      addTask,
+                                                      changeTaskStatus,
+                                                      filter,
+                                                  }) => {
     const [newTaskTitle, setNewTaskTitle] = useState("");
     const [error, setError] = useState<string | null>(null);
 
     const handleNewTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setNewTaskTitle(e.currentTarget.value);
+        setError(null);
     };
 
     const handleTaskAdd = () => {
@@ -82,17 +66,13 @@ export const Todolist: React.FC<TodolistProps> = ({
         if (trimmedTitle) {
             addTask(trimmedTitle);
             setNewTaskTitle("");
-        }
-        else {
+        } else {
             setError("Title is required");
         }
     };
 
     const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null);
-        if (e.key === "Enter" && newTaskTitle.trim()) {
-            handleTaskAdd();
-        }
+        if (e.key === "Enter") handleTaskAdd();
     };
 
     return (
@@ -103,15 +83,10 @@ export const Todolist: React.FC<TodolistProps> = ({
                     value={newTaskTitle}
                     onChange={handleNewTitleChange}
                     onKeyDown={handleKeyDown}
-                    aria-label="Новая задача"
-                    maxLength={MAX_TASK_TITLE_LENGTH}
                     className={error ? "error" : ""}
                 />
-                <button
-                    onClick={handleTaskAdd}
-                    aria-label="Добавить задачу"
-                >+</button>
-                {error && <div className={"error-message"}>{error}</div>}
+                <button onClick={handleTaskAdd}>+</button>
+                {error && <div className="error-message">{error}</div>}
             </div>
             <ul>
                 {tasks.map(task => (
@@ -123,10 +98,7 @@ export const Todolist: React.FC<TodolistProps> = ({
                     />
                 ))}
             </ul>
-            <FilterButtons 
-                onFilterChange={changeFilter} 
-                filter={filter} // передаем filter
-            />
+            <FilterButtons filter={filter} onFilterChange={changeFilter} />
         </div>
     );
 };
