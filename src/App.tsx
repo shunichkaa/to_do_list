@@ -36,10 +36,15 @@ export const App = () => {
         setFilter(value);
     };
 
-    const getFilteredTasks = () => {
-        if (filter === 'active') return tasks.filter(task => !task.isDone);
-        if (filter === 'completed') return tasks.filter(task => task.isDone);
-        return tasks;
+    const getFilteredTasks = (): Task[] => {
+        switch (filter) {
+            case 'active':
+                return tasks.filter(t => !t.isDone);
+            case 'completed':
+                return tasks.filter(t => t.isDone);
+            default:
+                return tasks;
+        }
     };
 
     return (
@@ -51,7 +56,7 @@ export const App = () => {
                 changeFilter={changeFilter}
                 createTask={createTask}
                 changeTaskStatus={changeTaskStatus}
-                filter={filter} // Pass the 'filter' value here
+                filter={filter}
             />
         </div>
     );
