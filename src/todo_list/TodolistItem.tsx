@@ -1,23 +1,25 @@
-import React, { ChangeEvent, useState } from "react";
-import { FilterValues, Task, Todolist } from "../App";
-import { Button } from "../Button";
+import React, {ChangeEvent, useState} from "react";
+import {FilterValues, Task, Todolist} from "../App";
+import {Button} from "../Button";
 
 type Props = {
     todolist: Todolist;
     tasks: Task[];
     deleteTask: (taskId: string) => void;
-    changeFilter: (todolistId: string, filter: FilterValues) => void;
+    changeFilter: (filter: FilterValues) => void;
     createTask: (title: string) => void;
     changeTaskStatus: (taskId: string, isDone: boolean) => void;
+    deleteTodolist: () => void;
 };
 
 export const TodolistItem: React.FC<Props> = ({
-                                                  todolist: { id, title, filter },
+                                                  todolist: {title, filter},
                                                   tasks,
                                                   deleteTask,
                                                   changeFilter,
                                                   createTask,
                                                   changeTaskStatus,
+                                                  deleteTodolist,
                                               }) => {
     const [taskTitle, setTaskTitle] = useState("");
     const [error, setError] = useState<string | null>(null);
@@ -37,20 +39,19 @@ export const TodolistItem: React.FC<Props> = ({
         setError(null);
     };
 
-    const changeFilterHandler = (filterValue: FilterValues) => {
-        changeFilter(id, filterValue);
-    };
-
     return (
         <div>
-            <h3>{title}</h3>
+            <h3>
+                {title}
+                <Button title={'Delete list'} onClick={deleteTodolist}/>
+            </h3>
             <div>
                 <input
                     value={taskTitle}
                     onChange={handleTitleChange}
                     className={error ? "error" : ""}
                 />
-                <Button title="+" onClick={createTaskHandler} />
+                <Button title="+" onClick={createTaskHandler}/>
                 {error && <div className="error-message">{error}</div>}
             </div>
 
@@ -66,7 +67,7 @@ export const TodolistItem: React.FC<Props> = ({
                                 onChange={(e) => changeTaskStatus(task.id, e.currentTarget.checked)}
                             />
                             <span>{task.title}</span>
-                            <Button title="x" onClick={() => deleteTask(task.id)} />
+                            <Button title={'x'} onClick={() => deleteTask(task.id)}/>
                         </li>
                     ))}
                 </ul>
@@ -75,13 +76,13 @@ export const TodolistItem: React.FC<Props> = ({
             <div>
                 <Button className={filter === 'all' ? 'active-filter' : ''}
                         title={'All'}
-                        onClick={() => changeFilterHandler('all')} />
+                        onClick={() => changeFilter('all')}/>
                 <Button className={filter === 'active' ? 'active-filter' : ''}
                         title={'Active'}
-                        onClick={() => changeFilterHandler('active')} />
+                        onClick={() => changeFilter('active')}/>
                 <Button className={filter === 'completed' ? 'active-filter' : ''}
                         title={'Completed'}
-                        onClick={() => changeFilterHandler('completed')} />
+                        onClick={() => changeFilter('completed')}/>
             </div>
         </div>
     );
