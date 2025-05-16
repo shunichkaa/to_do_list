@@ -34,25 +34,25 @@ const FilterButtons: React.FC<FilterButtonsProps> = ({ filter, onFilterChange })
     </div>
 );
 
-type TodolistProps = {
+type TodolistItemProps = {
     title: string;
     tasks: Task[];
-    removeTask: (taskId: string) => void;
+    deleteTask: (taskId: string) => void;
     changeFilter: (value: FilterValues) => void;
-    addTask: (title: string) => void;
+    createTask: (title: string) => void;
     changeTaskStatus: (taskId: string, isDone: boolean) => void;
     filter: FilterValues;
 };
 
-export const Todolist: React.FC<TodolistProps> = ({
-                                                      title,
-                                                      tasks,
-                                                      removeTask,
-                                                      changeFilter,
-                                                      addTask,
-                                                      changeTaskStatus,
-                                                      filter,
-                                                  }) => {
+export const TodolistItem: React.FC<TodolistItemProps> = ({
+                                                              title,
+                                                              tasks,
+                                                              deleteTask,
+                                                              changeFilter,
+                                                              createTask,
+                                                              changeTaskStatus,
+                                                              filter,
+                                                          }) => {
     const [newTaskTitle, setNewTaskTitle] = useState("");
     const [error, setError] = useState<string | null>(null);
 
@@ -64,7 +64,7 @@ export const Todolist: React.FC<TodolistProps> = ({
     const handleTaskAdd = () => {
         const trimmedTitle = newTaskTitle.trim();
         if (trimmedTitle) {
-            addTask(trimmedTitle);
+            createTask(trimmedTitle);
             setNewTaskTitle("");
         } else {
             setError("Title is required");
@@ -94,7 +94,7 @@ export const Todolist: React.FC<TodolistProps> = ({
                         key={task.id}
                         task={task}
                         onStatusChange={changeTaskStatus}
-                        onRemove={removeTask}
+                        onRemove={deleteTask}
                     />
                 ))}
             </ul>
