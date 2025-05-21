@@ -1,4 +1,4 @@
-import {KeyboardEvent, useState} from 'react';
+import {useState} from 'react';
 import './App.css'
 import {TodolistItem} from "./todo_list/TodolistItem";
 import {v1} from "uuid";
@@ -95,7 +95,7 @@ export function App() {
                         todolist={todolist}
                         tasks={filteredTasks}
                         deleteTask={(taskId) => deleteTask(todolist.id, taskId)}
-                        changeFilter={changeFilter} // Просто передаем оригинальную функцию
+                        changeFilter={changeFilter}
                         createTask={(title) => createTask(todolist.id, title)}
                         changeTaskStatus={(taskId, isDone) => changeTaskStatus(todolist.id, taskId, isDone)}
                         deleteTodolist={() => deleteTodolist(todolist.id)}
