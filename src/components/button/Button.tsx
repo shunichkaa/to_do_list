@@ -1,9 +1,20 @@
-type Props = {
-    title: string
-    onClick?: () => void
-    className?: string
-}
+import {ReactNode} from "react";
 
-export const Button = ({ title, onClick, className }: Props) => {
-    return <button className={className} onClick={onClick}>{title}</button>
-}
+type Props = {
+    variant?: string;
+    color?: string;
+    onClick: () => void;
+    title?: string;
+    children?: ReactNode;
+};
+
+export const Button = ({variant = "text", color = "default", onClick, title, children}: Props) => {
+    return (
+        <button
+            className={`btn ${variant} ${color}`}
+            onClick={onClick}
+        >
+            {children ?? title}
+        </button>
+    );
+};
