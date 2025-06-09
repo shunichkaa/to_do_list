@@ -1,10 +1,10 @@
-import { Button, Checkbox, IconButton, List, ListItem } from "@mui/material";
-import { ChangeEvent } from "react";
-import { FilterValues } from "../types";
-import { CreateItemForm } from "../components/createItemForm/CreateItemForm";
-import { getListItemSx } from "../components/createItemForm/TodolistItem.styles";
-import { EditableSpan } from "../components/editableSpan/EditableSpan";
-import { Delete } from "@mui/icons-material";
+import {Button, Checkbox, IconButton, List, ListItem} from "@mui/material";
+import {ChangeEvent} from "react";
+import {FilterValues} from "../types";
+import {CreateItemForm} from "../components/createItemForm/CreateItemForm";
+import {getListItemSx} from "../components/createItemForm/TodolistItem.styles";
+import {EditableSpan} from "../components/editableSpan/EditableSpan";
+import {Delete} from "@mui/icons-material";
 
 type TaskType = {
     id: string;
@@ -41,7 +41,7 @@ export const TodolistItem = ({
                                  changeTaskTitle,
                                  changeTodolistTitle,
                              }: Props) => {
-    const { id, title, filter } = todolist;
+    const {id, title, filter} = todolist;
 
     const handleFilterChange = (filter: FilterValues) => changeFilter(id, filter);
     const handleDeleteTodolist = () => deleteTodolist(id);
@@ -49,14 +49,14 @@ export const TodolistItem = ({
 
     return (
         <div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <EditableSpan value={title} onChange={handleChangeTodolistTitle} />
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                <EditableSpan value={title} onChange={handleChangeTodolistTitle}/>
                 <IconButton onClick={handleDeleteTodolist}>
-                    <Delete />
+                    <Delete/>
                 </IconButton>
             </div>
 
-            <CreateItemForm onCreateItem={createTask} />
+            <CreateItemForm onCreateItem={createTask}/>
 
             {tasks.length === 0 ? (
                 <p>Тасок нет</p>
@@ -70,10 +70,10 @@ export const TodolistItem = ({
 
                         return (
                             <ListItem key={task.id} sx={getListItemSx(task.isDone)}>
-                                <Checkbox checked={task.isDone} onChange={handleStatusChange} />
-                                <EditableSpan value={task.title} onChange={handleChangeTitle} />
+                                <Checkbox checked={task.isDone} onChange={handleStatusChange}/>
+                                <EditableSpan value={task.title} onChange={handleChangeTitle}/>
                                 <IconButton onClick={handleDeleteTask}>
-                                    <Delete />
+                                    <Delete/>
                                 </IconButton>
                             </ListItem>
                         );
@@ -81,7 +81,7 @@ export const TodolistItem = ({
                 </List>
             )}
 
-            <div style={{ marginTop: '10px' }}>
+            <div style={{marginTop: '10px'}}>
                 <Button
                     variant={filter === 'all' ? 'outlined' : 'text'}
                     color="inherit"

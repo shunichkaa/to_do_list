@@ -1,8 +1,8 @@
-import { useReducer, useState } from 'react';
+import {useReducer, useState} from 'react';
 import './App.css';
-import { TodolistItem } from "./todo_list/TodolistItem";
-import { v1 } from "uuid";
-import { CreateItemForm } from "./components/createItemForm/CreateItemForm";
+import {TodolistItem} from "./todo_list/TodolistItem";
+import {v1} from "uuid";
+import {CreateItemForm} from "./components/createItemForm/CreateItemForm";
 import {
     AppBar,
     Button,
@@ -15,10 +15,10 @@ import {
     ThemeProvider,
     Toolbar
 } from "@mui/material";
-import { createTheme } from '@mui/material/styles';
+import {createTheme} from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
-import { containerSx } from "./components/createItemForm/TodolistItem.styles";
-import { FilterValues, Task, TasksState, ThemeMode } from './types';
+import {containerSx} from "./components/createItemForm/TodolistItem.styles";
+import {FilterValues, Task, TasksState, ThemeMode} from './types';
 import {
     changeTodolistFilterAC,
     changeTodolistTitleAC,
@@ -32,7 +32,7 @@ export function App() {
     const theme = createTheme({
         palette: {
             mode: themeMode,
-            primary: { main: '#087EA4' },
+            primary: {main: '#087EA4'},
         },
     });
 
@@ -54,7 +54,7 @@ export function App() {
     };
 
     const createTask = (todolistId: string, title: string) => {
-        const newTask: Task = { id: v1(), title, isDone: false };
+        const newTask: Task = {id: v1(), title, isDone: false};
         setTasks(prev => ({
             ...prev,
             [todolistId]: [newTask, ...(prev[todolistId] || [])]
@@ -64,25 +64,25 @@ export function App() {
     const changeTaskStatus = (todolistId: string, taskId: string, isDone: boolean) => {
         setTasks(prev => ({
             ...prev,
-            [todolistId]: prev[todolistId]?.map(t => t.id === taskId ? { ...t, isDone } : t) || []
+            [todolistId]: prev[todolistId]?.map(t => t.id === taskId ? {...t, isDone} : t) || []
         }));
     };
 
     const changeTaskTitle = (todolistId: string, taskId: string, title: string) => {
         setTasks(prev => ({
             ...prev,
-            [todolistId]: prev[todolistId]?.map(t => t.id === taskId ? { ...t, title } : t) || []
+            [todolistId]: prev[todolistId]?.map(t => t.id === taskId ? {...t, title} : t) || []
         }));
     };
 
     const changeFilter = (todolistId: string, filter: FilterValues) => {
-        dispatchToTodolists(changeTodolistFilterAC({ id: todolistId, filter }));
+        dispatchToTodolists(changeTodolistFilterAC({id: todolistId, filter}));
     };
 
     const deleteTodolist = (todolistId: string) => {
         dispatchToTodolists(deleteTodolistAC(todolistId));
         setTasks(prev => {
-            const newTasks = { ...prev };
+            const newTasks = {...prev};
             delete newTasks[todolistId];
             return newTasks;
         });
@@ -91,24 +91,24 @@ export function App() {
     const createTodolist = (title: string) => {
         const action = createTodolistAC(title);
         dispatchToTodolists(action);
-        setTasks(prev => ({ ...prev, [action.payload.id]: [] }));
+        setTasks(prev => ({...prev, [action.payload.id]: []}));
     };
 
     const changeTodolistTitle = (todolistId: string, title: string) => {
-        dispatchToTodolists(changeTodolistTitleAC({ id: todolistId, title }));
+        dispatchToTodolists(changeTodolistTitleAC({id: todolistId, title}));
     };
 
     return (
         <ThemeProvider theme={theme}>
-            <CssBaseline />
+            <CssBaseline/>
             <div className="app">
-                <AppBar position="static" sx={{ mb: 3 }}>
+                <AppBar position="static" sx={{mb: 3}}>
                     <Toolbar>
                         <Container maxWidth="lg" sx={containerSx}>
                             <IconButton color="inherit" onClick={handleMenu}>
-                                <MenuIcon />
+                                <MenuIcon/>
                             </IconButton>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                            <div style={{display: 'flex', alignItems: 'center', gap: 10}}>
                                 <Button color="inherit">Sign in</Button>
                                 <Button color="inherit">Sign up</Button>
                                 <Button color="inherit">Faq</Button>
@@ -116,7 +116,7 @@ export function App() {
                                     checked={themeMode === 'dark'}
                                     onChange={toggleTheme}
                                     color="default"
-                                    inputProps={{ 'aria-label': 'toggle theme' }}
+                                    inputProps={{'aria-label': 'toggle theme'}}
                                 />
                             </div>
                         </Container>
@@ -124,9 +124,9 @@ export function App() {
                 </AppBar>
 
                 <Container maxWidth="lg">
-                    <Grid container sx={{ mb: 3 }}>
+                    <Grid container sx={{mb: 3}}>
                         <Grid item>
-                            <CreateItemForm onCreateItem={createTodolist} />
+                            <CreateItemForm onCreateItem={createTodolist}/>
                         </Grid>
                     </Grid>
 
@@ -141,7 +141,7 @@ export function App() {
 
                             return (
                                 <Grid item key={todolist.id} xs={12} sm={6} md={4}>
-                                    <Paper sx={{ p: 2 }}>
+                                    <Paper sx={{p: 2}}>
                                         <TodolistItem
                                             todolist={todolist}
                                             tasks={filteredTasks}

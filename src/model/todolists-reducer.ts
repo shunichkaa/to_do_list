@@ -1,40 +1,66 @@
-import type { FilterValues, TasksState, Todolist } from '../types'
-import { v1 } from 'uuid'
+import {v1} from 'uuid'
 
-// Actions
-export const deleteTodolistAC = (id: string) => {
-    return { type: 'delete_todolist', payload: { id } } as const
+type FilterValues = 'all' | 'active' | 'completed'
+
+type TaskType = {
+    id: string
+    title: string
+    isDone: boolean
 }
 
-export const createTodolistAC = (title: string) => {
-    return {
-        type: 'create_todolist',
-        payload: {
-            title,
-            id: v1()
-        }
-    } as const
+type Todolist = {
+    id: string
+    title: string
+    filter: FilterValues
 }
 
-export const changeTodolistTitleAC = (payload: { id: string, title: string }) => {
-    return {
-        type: 'change_todolist_title',
-        payload
-    } as const
+type TasksState = {
+    [key: string]: TaskType[]
 }
 
-export const changeTodolistFilterAC = (payload: { id: string, filter: FilterValues }) => {
-    return {
-        type: 'change_todolist_filter',
-        payload
-    } as const
-}
+const tasksInitialState: TasksState = {}
 
-// Action Types
-export type DeleteTodolistAction = ReturnType<typeof deleteTodolistAC>
-export type CreateTodolistAction = ReturnType<typeof createTodolistAC>
-export type ChangeTodolistTitleAction = ReturnType<typeof changeTodolistTitleAC>
-export type ChangeTodolistFilterAction = ReturnType<typeof changeTodolistFilterAC>
+const todolistsInitialState: Todolist[] = []
+
+export const deleteTodolistAC = (id: string) => ({
+    type: 'delete_todolist' as const,
+    payload: {id}
+})
+
+export const createTodolistAC = (title: string) => ({
+    type: 'create_todolist' as const,
+    payload: {
+        title,
+        id: v1()
+    }
+})
+
+export const deleteTaskAC = (payload: { todolistId: string; taskId: string }) => ({
+    type: 'DELETE_TASK' as const,
+    payload
+})
+
+export const createTaskAC = (payload: { todolistId: string; title: string }) => ({
+    type: 'CREATE_TASK' as const,
+    payload
+})
+
+export const changeTodolistTitleAC = (payload: { id: string; title: string }) => ({
+    type: 'change_todolist_title' as const,
+    payload
+})
+
+export const changeTodolistFilterAC = (payload: { id: string; filter: FilterValues }) => ({
+    type: 'change_todolist_filter' as const,
+    payload
+})
+
+type DeleteTodolistAction = ReturnType<typeof deleteTodolistAC>
+type CreateTodolistAction = ReturnType<typeof createTodolistAC>
+type ChangeTodolistTitleAction = ReturnType<typeof changeTodolistTitleAC>
+type ChangeTodolistFilterAction = ReturnType<typeof changeTodolistFilterAC>
+type DeleteTaskAction = ReturnType<typeof deleteTaskAC>
+type CreateTaskAction = ReturnType<typeof createTaskAC>
 
 type TodolistsActions =
     | DeleteTodolistAction
@@ -45,27 +71,53 @@ type TodolistsActions =
 type TasksActions =
     | CreateTodolistAction
     | DeleteTodolistAction
+    | DeleteTaskAction
+    | CreateTaskAction
 
-// Tasks Reducer
-const tasksInitialState: TasksState = {}
-
-export const tasksReducer = (state: TasksState = tasksInitialState, action: TasksActions): TasksState => {
+export const tasksReducer = (
+    state: TasksState = tasksInitialState,
+    action: TasksActions
+): TasksState => {
     switch (action.type) {
-        case 'create_todolist': {
-            return { ...state, [action.payload.id]: [] }
+        case 'CREATE_TASK': {
+            const {todolistId, title} = action.payload
+            const newTask: TaskType = {
+                id: crypto.randomUUID(),
+                title,
+                isDone: false
+            }
+
+            return {
+                ...state,
+                [todolistId]: [newTask, ...(state[todolistId] || [])]
+            }
         }
+
+        case 'DELETE_TASK': {
+            const {todolistId, taskId} = action.payload
+            return {
+                ...state,
+                [todolistId]: state[todolistId].filter(task => task.id !== taskId)
+            }
+        }
+
+        case 'create_todolist': {
+            return {
+                ...state,
+                [action.payload.id]: []
+            }
+        }
+
         case 'delete_todolist': {
-            const newState = { ...state }
+            const newState = {...state}
             delete newState[action.payload.id]
             return newState
         }
+
         default:
             return state
     }
 }
-
-// Todolists Reducer
-const todolistsInitialState: Todolist[] = []
 
 export const createNewTodolist = (id: string, title: string): Todolist => ({
     id,
@@ -73,30 +125,34 @@ export const createNewTodolist = (id: string, title: string): Todolist => ({
     filter: 'all'
 })
 
-export const todolistsReducer = (state: Todolist[] = todolistsInitialState, action: TodolistsActions): Todolist[] => {
+export const todolistsReducer = (
+    state: Todolist[] = todolistsInitialState,
+    action: TodolistsActions
+): Todolist[] => {
     switch (action.type) {
-        case 'delete_todolist': {
+        case 'delete_todolist':
             return state.filter(todolist => todolist.id !== action.payload.id)
-        }
+
         case 'create_todolist': {
-            const { id, title } = action.payload
+            const {id, title} = action.payload
             const newTodolist = createNewTodolist(id, title)
             return [newTodolist, ...state]
         }
-        case 'change_todolist_title': {
+
+        case 'change_todolist_title':
             return state.map(todolist =>
                 todolist.id === action.payload.id
-                    ? { ...todolist, title: action.payload.title }
+                    ? {...todolist, title: action.payload.title}
                     : todolist
             )
-        }
-        case 'change_todolist_filter': {
+
+        case 'change_todolist_filter':
             return state.map(todolist =>
                 todolist.id === action.payload.id
-                    ? { ...todolist, filter: action.payload.filter }
+                    ? {...todolist, filter: action.payload.filter}
                     : todolist
             )
-        }
+
         default:
             return state
     }
