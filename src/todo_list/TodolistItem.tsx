@@ -1,7 +1,7 @@
 import {Task} from "../App";
 import {ChangeEvent} from "react";
 import {CreateItemForm} from "../components/createItemForm/CreateItemForm";
-import {EditableSpan} from "../components/EditableSpan/EditableSpan";
+import {EditableSpan} from "../components/editableSpan/EditableSpan";
 import {Button, Checkbox, IconButton, List, ListItem} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import {getListItemSx} from "../components/createItemForm/TodolistItem.styles";
