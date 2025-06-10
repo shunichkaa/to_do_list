@@ -42,7 +42,6 @@ export const TodolistItem = ({
                                  changeTodolistTitle,
                              }: Props) => {
     const {id, title, filter} = todolist;
-
     const handleFilterChange = (filter: FilterValues) => changeFilter(id, filter);
     const handleDeleteTodolist = () => deleteTodolist(id);
     const handleChangeTodolistTitle = (title: string) => changeTodolistTitle(id, title);
