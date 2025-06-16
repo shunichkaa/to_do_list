@@ -1,8 +1,8 @@
 import {useReducer, useState} from 'react';
 import './App.css';
-import {TodolistItem} from './todo_list/TodolistItem';
+import {TodolistItem} from '../todo_list/TodolistItem';
 import {v1} from 'uuid';
-import {CreateItemForm} from './components/createItemForm/CreateItemForm';
+import {CreateItemForm} from '../components/createItemForm/CreateItemForm';
 import {
     AppBar,
     Button,
@@ -17,15 +17,15 @@ import {
 } from '@mui/material';
 import {createTheme} from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
-import {containerSx} from './components/createItemForm/TodolistItem.styles';
-import {FilterValues, Task, TasksState, ThemeMode} from './types';
+import {containerSx} from '../components/createItemForm/TodolistItem.styles';
+import {FilterValues, Task, TasksState, ThemeMode} from '../types';
 import {
     changeTodolistFilterAC,
     changeTodolistTitleAC,
     createTodolistAC,
     deleteTodolistAC,
     todolistsReducer,
-} from './model/todolists-reducer';
+} from '../model/todolists-reducer';
 
 export function App() {
     const [themeMode, setThemeMode] = useState<ThemeMode>('light');
