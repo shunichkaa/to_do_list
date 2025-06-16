@@ -1,7 +1,6 @@
 import {useReducer, useState} from 'react';
 import './App.css';
 import {TodolistItem} from '../todo_list/TodolistItem';
-import {v1} from 'uuid';
 import {CreateItemForm} from '../components/createItemForm/CreateItemForm';
 import {
     AppBar,
@@ -26,6 +25,7 @@ import {
     deleteTodolistAC,
     todolistsReducer,
 } from '../model/todolists-reducer';
+import {nanoid} from '@reduxjs/toolkit';
 
 export function App() {
     const [themeMode, setThemeMode] = useState<ThemeMode>('light');
@@ -43,34 +43,40 @@ export function App() {
     const handleClose = () => setAnchorEl(null);
     const [todolists, dispatchToTodolists] = useReducer(todolistsReducer, []);
     const [tasks, setTasks] = useState<TasksState>({});
+
     const deleteTask = (todolistId: string, taskId: string) => {
         setTasks((prev) => ({
             ...prev,
             [todolistId]: prev[todolistId]?.filter((t) => t.id !== taskId) || [],
         }));
     };
+
     const createTask = (todolistId: string, title: string) => {
-        const newTask: Task = {id: v1(), title, isDone: false};
+        const newTask: Task = {id: nanoid(), title, isDone: false};
         setTasks((prev) => ({
             ...prev,
             [todolistId]: [newTask, ...(prev[todolistId] || [])],
         }));
     };
+
     const changeTaskStatus = (todolistId: string, taskId: string, isDone: boolean) => {
         setTasks((prev) => ({
             ...prev,
             [todolistId]: prev[todolistId]?.map((t) => (t.id === taskId ? {...t, isDone} : t)) || [],
         }));
     };
+
     const changeTaskTitle = (todolistId: string, taskId: string, title: string) => {
         setTasks((prev) => ({
             ...prev,
             [todolistId]: prev[todolistId]?.map((t) => (t.id === taskId ? {...t, title} : t)) || [],
         }));
     };
+
     const changeFilter = (todolistId: string, filter: FilterValues) => {
         dispatchToTodolists(changeTodolistFilterAC({id: todolistId, filter}));
     };
+
     const deleteTodolist = (todolistId: string) => {
         dispatchToTodolists(deleteTodolistAC({id: todolistId}));
         setTasks((prev) => {
@@ -79,14 +85,15 @@ export function App() {
             return newTasks;
         });
     };
+
     const changeTodolistTitle = (todolistId: string, title: string) => {
         dispatchToTodolists(changeTodolistTitleAC({id: todolistId, title}));
     };
+
     const createTodolist = (title: string) => {
-        const newId = v1();
-        const action = createTodolistAC({id: newId, title});
+        const action = createTodolistAC(title);
         dispatchToTodolists(action);
-        setTasks(prev => ({...prev, [newId]: []}));
+        setTasks(prev => ({...prev, [action.payload.id]: []}));
     };
 
     return (
