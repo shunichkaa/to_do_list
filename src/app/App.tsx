@@ -14,10 +14,9 @@ import {
     ThemeProvider,
     Toolbar,
 } from '@mui/material';
-import {createTheme} from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import {containerSx} from '../components/createItemForm/TodolistItem.styles';
-import {FilterValues, Task, TasksState, ThemeMode} from '../types';
+import {FilterValues, Task, TasksState} from '../types';
 import {
     changeTodolistFilterAC,
     changeTodolistTitleAC,
@@ -26,24 +25,31 @@ import {
     todolistsReducer,
 } from '../model/todolists-reducer';
 import {nanoid} from '@reduxjs/toolkit';
+import {useAppDispatch, useAppSelector} from "../common/hooks/useAppDispatch";
+import {changeThemeModeAC, selectThemeMode} from "../model/app-reducer";
+import {getTheme} from "../common/theme/theme";
 
 export function App() {
-    const [themeMode, setThemeMode] = useState<ThemeMode>('light');
-    const theme = createTheme({
-        palette: {
-            mode: themeMode,
-            primary: {main: '#087EA4'},
-        },
-    });
+    // Redux theme handling
+    const dispatch = useAppDispatch();
+    const themeMode = useAppSelector(selectThemeMode);
+    const theme = getTheme(themeMode);
 
-    const toggleTheme = () => setThemeMode((prev) => (prev === 'light' ? 'dark' : 'light'));
+    // Menu state
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
     const handleMenu = (e: React.MouseEvent<HTMLElement>) => setAnchorEl(e.currentTarget);
     const handleClose = () => setAnchorEl(null);
+
+    // Todolists and tasks state
     const [todolists, dispatchToTodolists] = useReducer(todolistsReducer, []);
     const [tasks, setTasks] = useState<TasksState>({});
 
+    // Theme toggle handler
+    const handleThemeChange = () => {
+        dispatch(changeThemeModeAC({themeMode: themeMode === 'light' ? 'dark' : 'light'}));
+    };
+
+    // Tasks handlers
     const deleteTask = (todolistId: string, taskId: string) => {
         setTasks((prev) => ({
             ...prev,
@@ -73,6 +79,7 @@ export function App() {
         }));
     };
 
+    // Todolist handlers
     const changeFilter = (todolistId: string, filter: FilterValues) => {
         dispatchToTodolists(changeTodolistFilterAC({id: todolistId, filter}));
     };
@@ -103,16 +110,25 @@ export function App() {
                 <AppBar position="static" sx={{mb: 3}}>
                     <Toolbar>
                         <Container maxWidth="lg" sx={containerSx}>
-                            <IconButton color="inherit" onClick={handleMenu}>
+                            <IconButton
+                                color="inherit"
+                                onClick={handleMenu}
+                                aria-label="menu"
+                            >
                                 <MenuIcon/>
                             </IconButton>
-                            <div style={{display: 'flex', alignItems: 'center', gap: 10}}>
+                            <div style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 10,
+                                marginLeft: 'auto'
+                            }}>
                                 <Button color="inherit">Sign in</Button>
                                 <Button color="inherit">Sign up</Button>
-                                <Button color="inherit">Faq</Button>
+                                <Button color="inherit">FAQ</Button>
                                 <Switch
                                     checked={themeMode === 'dark'}
-                                    onChange={toggleTheme}
+                                    onChange={handleThemeChange}
                                     color="default"
                                     inputProps={{'aria-label': 'toggle theme'}}
                                 />
@@ -131,12 +147,11 @@ export function App() {
                     <Grid container spacing={4}>
                         {todolists.map((todolist) => {
                             const todolistTasks = tasks[todolist.id] || [];
-                            const filteredTasks =
-                                todolist.filter === 'all'
-                                    ? todolistTasks
-                                    : todolist.filter === 'active'
-                                        ? todolistTasks.filter((t) => !t.isDone)
-                                        : todolistTasks.filter((t) => t.isDone);
+                            const filteredTasks = todolist.filter === 'all'
+                                ? todolistTasks
+                                : todolist.filter === 'active'
+                                    ? todolistTasks.filter((t) => !t.isDone)
+                                    : todolistTasks.filter((t) => t.isDone);
 
                             return (
                                 <Grid item key={todolist.id} xs={12} sm={6} md={4}>
@@ -154,7 +169,9 @@ export function App() {
                                             changeTaskTitle={(_, taskId, title) =>
                                                 changeTaskTitle(todolist.id, taskId, title)
                                             }
-                                            changeTodolistTitle={(title) => changeTodolistTitle(todolist.id, title)}
+                                            changeTodolistTitle={(title) =>
+                                                changeTodolistTitle(todolist.id, title)
+                                            }
                                         />
                                     </Paper>
                                 </Grid>
