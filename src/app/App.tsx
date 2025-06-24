@@ -4,6 +4,7 @@ import {useAppSelector} from "../common/hooks/useAppSelector";
 import {selectThemeMode} from "../model/app-reducer";
 import {getTheme} from "../common/theme/theme";
 import {Header} from "@/common/components/header/Header";
+import {Main} from "@/common/components/main/Main";
 
 
 export const App = () => {
@@ -14,7 +15,7 @@ export const App = () => {
     return (
         <ThemeProvider theme={theme}>
             <div className={'app'}>
-                <CssBaseline />
+                <CssBaseline/>
                 <Header/>
                 <Main/>
             </div>
