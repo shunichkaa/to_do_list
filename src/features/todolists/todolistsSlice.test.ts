@@ -1,4 +1,4 @@
-import { FilterValues, Todolist } from '../types'
+import { FilterValues, Todolist } from '../../types'
 
 export const changeTodolistFilterAC = (payload: { id: string; filter: FilterValues }) => ({
     type: 'CHANGE_TODOLIST_FILTER' as const,

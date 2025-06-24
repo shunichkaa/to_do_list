@@ -1,6 +1,6 @@
 import {createAction, createReducer, nanoid} from '@reduxjs/toolkit';
-import {Task, TasksState} from '../types';
-import {createTodolistAC, deleteTodolistAC} from './todolists-reducer';
+import {Task, TasksState} from '../../types';
+import {createTodolistAC, deleteTodolistAC} from '../todolists/todolistsSlice';
 
 export const createTaskAC = createAction('tasks/createTask', (todolistId: string, title: string) => {
     return {payload: {todolistId, title}};
@@ -38,7 +38,7 @@ export const tasksReducer = createReducer(initialState, builder => {
         .addCase(deleteTaskAC, (state, action) => {
             const tasks = state[action.payload.todolistId];
             if (tasks) {
-                const index = tasks.findIndex(t => t.id === action.payload.taskId);
+                const index = tasks.findIndex((t: Task) => t.id === action.payload.taskId);
                 if (index !== -1) {
                     tasks.splice(index, 1);
                 }
@@ -47,7 +47,7 @@ export const tasksReducer = createReducer(initialState, builder => {
         .addCase(changeTaskStatusAC, (state, action) => {
             const tasks = state[action.payload.todolistId];
             if (tasks) {
-                const task = tasks.find(t => t.id === action.payload.taskId);
+                const task = tasks.find((t: Task) => t.id === action.payload.taskId);
                 if (task) {
                     task.isDone = action.payload.isDone;
                 }
@@ -56,7 +56,7 @@ export const tasksReducer = createReducer(initialState, builder => {
         .addCase(changeTaskTitleAC, (state, action) => {
             const tasks = state[action.payload.todolistId];
             if (tasks) {
-                const task = tasks.find(t => t.id === action.payload.taskId);
+                const task = tasks.find((t: Task) => t.id === action.payload.taskId);
                 if (task) {
                     task.title = action.payload.title;
                 }
