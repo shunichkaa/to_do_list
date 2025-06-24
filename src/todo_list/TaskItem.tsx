@@ -5,8 +5,9 @@ import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { EditableSpan } from '../common/components/editableSpan/EditableSpan'
 import { useAppDispatch } from '../common/hooks/useAppDispatch'
-import { Task, deleteTaskAC, changeTaskStatusAC, changeTaskTitleAC } from '../features/tasks/tasksSlice'
-import { getListItemSx } from '../common/components/main/listItemSx'
+import { deleteTaskAC, changeTaskStatusAC, changeTaskTitleAC } from '../features/tasks/tasksSlice'
+import { getListItemSx } from '../common/components/createItemForm/TodolistItem.styles'
+import { Task } from '../types'
 
 type Props = {
     task: Task
@@ -17,16 +18,16 @@ export const TaskItem = ({task, todolistId}: Props) => {
     const dispatch = useAppDispatch()
 
     const deleteTask = () => {
-        dispatch(deleteTaskAC({todolistId, taskId: task.id}))
+        dispatch(deleteTaskAC(todolistId, task.id))
     }
 
     const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) => {
         const newStatusValue = e.currentTarget.checked
-        dispatch(changeTaskStatusAC({todolistId, taskId: task.id, isDone: newStatusValue}))
+        dispatch(changeTaskStatusAC(todolistId, task.id, newStatusValue))
     }
 
     const changeTaskTitle = (title: string) => {
-        dispatch(changeTaskTitleAC({todolistId, taskId: task.id, title}))
+        dispatch(changeTaskTitleAC(todolistId, task.id, title))
     }
 
     return (

@@ -2,11 +2,14 @@ import React from 'react'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import { useAppSelector } from '../common/hooks/useAppSelector'
-import { selectTodolists, Todolist } from '../features/todolists/todolistsSlice'
 import { TodolistItem } from './TodolistItem'
+import { Todolist } from '../types'
+import { RootState } from '../features/store'
+
+const selectTodolists = (state: RootState) => state.todolists
 
 export const Todolists = () => {
-    const todolists = useAppSelector(selectTodolists) as Todolist[]
+    const todolists = useAppSelector(selectTodolists)
 
     return (
         <>

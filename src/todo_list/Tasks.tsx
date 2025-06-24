@@ -1,18 +1,20 @@
 import React from 'react'
 import List from '@mui/material/List'
-import { Todolist } from '../features/todolists/todolistsSlice'
 import { useAppSelector } from '../common/hooks/useAppSelector'
-import { selectTasks, Task } from '../features/tasks/tasksSlice'
 import { TaskItem } from './TaskItem'
+import { Todolist, Task } from '../types'
+import { RootState } from '../features/store'
 
 type Props = {
     todolist: Todolist
 }
 
+const selectTasks = (state: RootState) => state.tasks
+
 export const Tasks = ({todolist}: Props) => {
     const {id, filter} = todolist
 
-    const tasks = useAppSelector(selectTasks) as Record<string, Task[]>
+    const tasks = useAppSelector(selectTasks)
 
     const todolistTasks = tasks[id] || []
     let filteredTasks = todolistTasks

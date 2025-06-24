@@ -1,10 +1,10 @@
 import React from 'react'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
-import { Todolist, changeTodolistFilterAC } from '../features/todolists/todolistsSlice'
+import { changeTodolistFilterAC } from '../features/todolists/todolistsSlice'
 import { useAppDispatch } from '../common/hooks/useAppDispatch'
-import { containerSx } from '../common/components/main/containerSx'
-import { FilterValues } from '../features/todolists/types'
+import { containerSx } from '../common/components/createItemForm/TodolistItem.styles'
+import { FilterValues, Todolist } from '../types'
 
 type Props = {
     todolist: Todolist

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Todolist } from '../features/todolists/todolistsSlice'
+import { Todolist } from '../types'
 import { useAppDispatch } from '../common/hooks/useAppDispatch'
 import { createTaskAC } from '../features/tasks/tasksSlice'
 import { TodolistTitle } from './TodolistTitle'
@@ -15,7 +15,7 @@ export const TodolistItem = ({todolist}: Props) => {
     const dispatch = useAppDispatch()
 
     const createTask = (title: string) => {
-        dispatch(createTaskAC({todolistId: todolist.id, title}))
+        dispatch(createTaskAC(todolist.id, title))
     }
 
     return (
