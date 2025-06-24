@@ -1,9 +1,9 @@
 import {Button, Checkbox, IconButton, List, ListItem} from "@mui/material";
 import {ChangeEvent} from "react";
 import {FilterValues} from "../types";
-import {CreateItemForm} from "../components/createItemForm/CreateItemForm";
-import {getListItemSx} from "../components/createItemForm/TodolistItem.styles";
-import {EditableSpan} from "../components/editableSpan/EditableSpan";
+import {CreateItemForm} from "@/common/components/createItemForm/CreateItemForm";
+import {getListItemSx} from "@/common/components/createItemForm/TodolistItem.styles";
+import {EditableSpan} from "@/common/components/editableSpan/EditableSpan";
 import {Delete} from "@mui/icons-material";
 
 type TaskType = {
