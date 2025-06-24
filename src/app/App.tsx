@@ -25,15 +25,18 @@ import {
     todolistsReducer,
 } from '../model/todolists-reducer';
 import {nanoid} from '@reduxjs/toolkit';
-import {useAppDispatch, useAppSelector} from "../common/hooks/useAppDispatch";
+import { useAppDispatch } from "../common/hooks/useAppDispatch";
+import { useAppSelector } from "../common/hooks/useAppSelector";
 import {changeThemeModeAC, selectThemeMode} from "../model/app-reducer";
 import {getTheme} from "../common/theme/theme";
+
 
 export function App() {
     // Redux theme handling
     const dispatch = useAppDispatch();
     const themeMode = useAppSelector(selectThemeMode);
     const theme = getTheme(themeMode);
+
 
     // Menu state
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
