@@ -1,10 +1,10 @@
 import {useAppSelector} from "../../hooks/useAppSelector";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {changeThemeModeAC, selectThemeMode} from "../../../features/app-reducer";
-import {AppBar, Box, Button, Container, IconButton, Switch, Toolbar} from "@mui/material";
 import {containerSx} from "../createItemForm/TodolistItem.styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import {ThemeMode} from "../../../types";
+import {AppBar, Box, Button, Container, IconButton, Switch, Toolbar} from "@mui/material";
 
 const headerSx = {mb: 3};
 const navigationContainerSx = {
