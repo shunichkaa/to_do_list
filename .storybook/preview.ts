@@ -1,6 +1,7 @@
 import type { Preview } from '@storybook/react-webpack5'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
+import React from 'react'
 
 const theme = createTheme({
   palette: {
@@ -25,12 +26,12 @@ const preview: Preview = {
     },
   },
   decorators: [
-    (Story) => (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Story />
-      </ThemeProvider>
-    ),
+    (Story) => {
+      return React.createElement(ThemeProvider, { theme }, [
+        React.createElement(CssBaseline, { key: 'css-baseline' }),
+        React.createElement(Story, { key: 'story' })
+      ])
+    },
   ],
 };
 
