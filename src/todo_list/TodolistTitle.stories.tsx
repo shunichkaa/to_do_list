@@ -11,7 +11,7 @@ const meta: Meta<typeof TodolistTitle> = {
     layout: 'centered',
   },
   decorators: [
-    (Story) => (
+    (Story: any) => (
       <Provider store={store}>
         <div style={{ width: '400px', padding: '20px' }}>
           <Story />

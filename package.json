@@ -4,6 +4,7 @@
   "description": "This project was bootstrapped with Create React App.",
   "main": "index.js",
   "scripts": {
+    "storybook": "storybook dev -p 6006",
     "dev": "vite",
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -35,6 +36,8 @@
     "web-vitals": "^5.0.3"
   },
   "devDependencies": {
+    "@storybook/cli": "^9.0.15",
+    "@storybook/react": "^9.0.15",
     "@vitejs/plugin-react-swc": "^3.10.2",
     "typescript": "^5.8.3"
   },

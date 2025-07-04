@@ -11,7 +11,7 @@ const meta: Meta<typeof TaskItem> = {
     layout: 'centered',
   },
   decorators: [
-    (Story) => (
+    (Story: any) => (
       <Provider store={store}>
         <Story />
       </Provider>

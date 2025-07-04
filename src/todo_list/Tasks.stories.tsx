@@ -58,7 +58,7 @@ export const WithTasks: Story = {
     todolist: mockTodolist,
   },
   decorators: [
-    (Story) => (
+    (Story: any) => (
       <Provider store={mockStoreWithTasks}>
         <div style={{ width: '400px', padding: '20px' }}>
           <Story />
@@ -73,7 +73,7 @@ export const Empty: Story = {
     todolist: mockTodolist,
   },
   decorators: [
-    (Story) => (
+    (Story: any) => (
       <Provider store={mockStoreEmpty}>
         <div style={{ width: '400px', padding: '20px' }}>
           <Story />
@@ -91,7 +91,7 @@ export const ActiveFilter: Story = {
     },
   },
   decorators: [
-    (Story) => (
+    (Story: any) => (
       <Provider store={mockStoreWithTasks}>
         <div style={{ width: '400px', padding: '20px' }}>
           <Story />
@@ -109,7 +109,7 @@ export const CompletedFilter: Story = {
     },
   },
   decorators: [
-    (Story) => (
+    (Story: any) => (
       <Provider store={mockStoreWithTasks}>
         <div style={{ width: '400px', padding: '20px' }}>
           <Story />

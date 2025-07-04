@@ -50,7 +50,7 @@ const mockStoreEmpty = createMockStore([]);
 
 export const WithTodolists: Story = {
   decorators: [
-    (Story) => (
+    (Story: any) => (
       <Provider store={mockStoreWithTodolists}>
         <div style={{ padding: '20px' }}>
           <Story />
@@ -62,7 +62,7 @@ export const WithTodolists: Story = {
 
 export const Empty: Story = {
   decorators: [
-    (Story) => (
+    (Story: any) => (
       <Provider store={mockStoreEmpty}>
         <div style={{ padding: '20px' }}>
           <Story />
@@ -74,7 +74,7 @@ export const Empty: Story = {
 
 export const SingleTodolist: Story = {
   decorators: [
-    (Story) => (
+    (Story: any) => (
       <Provider store={createMockStore([mockTodolists[0]])}>
         <div style={{ padding: '20px' }}>
           <Story />
