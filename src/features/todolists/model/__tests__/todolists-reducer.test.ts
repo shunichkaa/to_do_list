@@ -4,8 +4,9 @@ import {
   changeTodolistFilterAC,
   changeTodolistTitleAC,
   createTodolistAC,
-  deleteTodolistAC, type Todolist,
-  todolistsReducer
+  deleteTodolistAC,
+  todolistsReducer,
+  type Todolist
 } from '../todolists-reducer'
 
 let todolistId1: string
@@ -17,8 +18,8 @@ beforeEach(() => {
   todolistId2 = nanoid()
 
   startState = [
-    { id: todolistId1, title: 'What to learn', filter: 'all' },
-    { id: todolistId2, title: 'What to buy', filter: 'all' },
+    { id: todolistId1, title: 'What to learn', filter: 'all', addedDate: '', order: 0 },
+    { id: todolistId2, title: 'What to buy', filter: 'all', addedDate: '', order: 0 },
   ]
 })
 

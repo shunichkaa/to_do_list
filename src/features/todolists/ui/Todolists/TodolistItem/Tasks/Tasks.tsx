@@ -2,6 +2,7 @@ import {useAppSelector} from '@/common/hooks'
 import {selectTasks} from '@/features/todolists/model/tasks-selectors'
 import type {Todolist} from '@/features/todolists/model/todolists-reducer'
 import {TaskItem} from './TaskItem/TaskItem'
+import {TaskStatuses} from '@/features/todolists/api/tasksApi'
 import List from '@mui/material/List'
 
 type Props = {
@@ -13,13 +14,13 @@ export const Tasks = ({todolist}: Props) => {
 
   const tasks = useAppSelector(selectTasks)
 
-  const todolistTasks = tasks[id]
+  const todolistTasks = tasks[id] || []
   let filteredTasks = todolistTasks
   if (filter === 'active') {
-    filteredTasks = todolistTasks.filter(task => !task.isDone)
+    filteredTasks = todolistTasks.filter(task => task.status !== TaskStatuses.Completed)
   }
   if (filter === 'completed') {
-    filteredTasks = todolistTasks.filter(task => task.isDone)
+    filteredTasks = todolistTasks.filter(task => task.status === TaskStatuses.Completed)
   }
 
   return (
