@@ -1,16 +1,32 @@
-import {createAction, createReducer} from '@reduxjs/toolkit'
+import { createAction, createReducer } from "@reduxjs/toolkit"
 
-export const changeThemeModeAC = createAction<{themeMode: ThemeMode}>('app/changeThemeMode')
+export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed"
 
-const initialState = {
-  themeMode: 'light' as ThemeMode,
+export type AppStateType = {
+  status: RequestStatusType
+  error: string | null
+  isInitialized: boolean
 }
 
-export const appReducer = createReducer(initialState, builder => {
+const initialState: AppStateType = {
+  status: "idle",
+  error: null,
+  isInitialized: false,
+}
+
+export const appReducer = createReducer(initialState, (builder) => {
   builder
-      .addCase(changeThemeModeAC, (state, action) => {
-        state.themeMode = action.payload.themeMode
-      })
+    .addCase(setAppStatusAC, (state, action) => {
+      state.status = action.payload.status
+    })
+    .addCase(setAppErrorAC, (state, action) => {
+      state.error = action.payload.error
+    })
+    .addCase(setAppInitializedAC, (state, action) => {
+      state.isInitialized = action.payload.isInitialized
+    })
 })
 
-export type ThemeMode = 'dark' | 'light'
+export const setAppStatusAC = createAction<{ status: RequestStatusType }>("app/setAppStatus")
+export const setAppErrorAC = createAction<{ error: string | null }>("app/setAppError")
+export const setAppInitializedAC = createAction<{ isInitialized: boolean }>("app/setAppInitialized")
