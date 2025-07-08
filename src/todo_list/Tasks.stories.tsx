@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react-webpack5';
-import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
-import { Tasks } from './Tasks';
-import { Todolist, Task } from '../types';
+import type { Meta, StoryObj } from "@storybook/react-webpack5"
+import { Provider } from "react-redux"
+import { configureStore } from "@reduxjs/toolkit"
+import { Tasks } from "./Tasks"
+import { Todolist, Task } from "../types"
 
 // Создаем мок store для stories
 const createMockStore = (tasks: Record<string, Task[]>) => {
@@ -12,46 +12,46 @@ const createMockStore = (tasks: Record<string, Task[]>) => {
       todolists: (state = {}) => state,
       app: (state = {}) => state,
     },
-  });
-};
+  })
+}
 
 const meta: Meta<typeof Tasks> = {
-  title: 'TodoList/Tasks',
+  title: "TodoList/Tasks",
   component: Tasks,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     todolist: {
-      control: 'object',
+      control: "object",
     },
   },
-};
+}
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 const mockTodolist: Todolist = {
-  id: 'todolist-1',
-  title: 'Мой список задач',
-  filter: 'all',
-};
+  id: "todolist-1",
+  title: "Мой список задач",
+  filter: "all",
+}
 
 const mockTasks: Task[] = [
-  { id: '1', title: 'Изучить React', isDone: false },
-  { id: '2', title: 'Изучить TypeScript', isDone: true },
-  { id: '3', title: 'Создать проект', isDone: false },
-  { id: '4', title: 'Написать тесты', isDone: true },
-];
+  { id: "1", title: "Изучить React", isDone: false },
+  { id: "2", title: "Изучить TypeScript", isDone: true },
+  { id: "3", title: "Создать проект", isDone: false },
+  { id: "4", title: "Написать тесты", isDone: true },
+]
 
 const mockStoreWithTasks = createMockStore({
-  'todolist-1': mockTasks,
-});
+  "todolist-1": mockTasks,
+})
 
 const mockStoreEmpty = createMockStore({
-  'todolist-1': [],
-});
+  "todolist-1": [],
+})
 
 export const WithTasks: Story = {
   args: {
@@ -60,13 +60,13 @@ export const WithTasks: Story = {
   decorators: [
     (Story: any) => (
       <Provider store={mockStoreWithTasks}>
-        <div style={{ width: '400px', padding: '20px' }}>
+        <div style={{ width: "400px", padding: "20px" }}>
           <Story />
         </div>
       </Provider>
     ),
   ],
-};
+}
 
 export const Empty: Story = {
   args: {
@@ -75,46 +75,46 @@ export const Empty: Story = {
   decorators: [
     (Story: any) => (
       <Provider store={mockStoreEmpty}>
-        <div style={{ width: '400px', padding: '20px' }}>
+        <div style={{ width: "400px", padding: "20px" }}>
           <Story />
         </div>
       </Provider>
     ),
   ],
-};
+}
 
 export const ActiveFilter: Story = {
   args: {
     todolist: {
       ...mockTodolist,
-      filter: 'active',
+      filter: "active",
     },
   },
   decorators: [
     (Story: any) => (
       <Provider store={mockStoreWithTasks}>
-        <div style={{ width: '400px', padding: '20px' }}>
+        <div style={{ width: "400px", padding: "20px" }}>
           <Story />
         </div>
       </Provider>
     ),
   ],
-};
+}
 
 export const CompletedFilter: Story = {
   args: {
     todolist: {
       ...mockTodolist,
-      filter: 'completed',
+      filter: "completed",
     },
   },
   decorators: [
     (Story: any) => (
       <Provider store={mockStoreWithTasks}>
-        <div style={{ width: '400px', padding: '20px' }}>
+        <div style={{ width: "400px", padding: "20px" }}>
           <Story />
         </div>
       </Provider>
     ),
   ],
-}; 
+}

@@ -21,12 +21,14 @@ npm run build-storybook
 ### TodoList компоненты
 
 #### TaskItem
+
 - **Default** - обычная задача
 - **Completed** - выполненная задача
 - **LongTitle** - задача с длинным названием
 - **ShortTitle** - задача с коротким названием
 
 #### TodolistItem
+
 - **Default** - стандартный список задач
 - **LongTitle** - список с длинным названием
 - **ShortTitle** - список с коротким названием
@@ -34,22 +36,26 @@ npm run build-storybook
 - **WithCompletedFilter** - с фильтром выполненных
 
 #### TodolistTitle
+
 - **Default** - стандартный заголовок
 - **LongTitle** - длинный заголовок
 - **ShortTitle** - короткий заголовок
 
 #### FilterButtons
+
 - **AllFilter** - фильтр "Все"
 - **ActiveFilter** - фильтр "Активные"
 - **CompletedFilter** - фильтр "Выполненные"
 
 #### Tasks
+
 - **WithTasks** - список с задачами
 - **Empty** - пустой список
 - **ActiveFilter** - только активные задачи
 - **CompletedFilter** - только выполненные задачи
 
 #### Todolists
+
 - **WithTodolists** - несколько списков задач
 - **Empty** - пустой список
 - **SingleTodolist** - один список задач
@@ -57,10 +63,12 @@ npm run build-storybook
 ### Common компоненты
 
 #### CreateItemForm
+
 - **Default** - стандартная форма
 - **WithLongPlaceholder** - форма с длинным placeholder
 
 #### EditableSpan
+
 - **Default** - редактируемый текст
 - **ShortText** - короткий текст
 - **LongText** - длинный текст
@@ -68,6 +76,7 @@ npm run build-storybook
 - **WithSpecialCharacters** - текст со специальными символами
 
 #### Button
+
 - **Default** - стандартная кнопка
 - **WithChildren** - кнопка с контентом
 - **Primary** - основная кнопка
@@ -97,27 +106,27 @@ npm run build-storybook
 Пример:
 
 ```typescript
-import type { Meta, StoryObj } from '@storybook/react';
-import { YourComponent } from './YourComponent';
+import type { Meta, StoryObj } from "@storybook/react"
+import { YourComponent } from "./YourComponent"
 
 const meta: Meta<typeof YourComponent> = {
-  title: 'Category/YourComponent',
+  title: "Category/YourComponent",
   component: YourComponent,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     // настройки контролов
   },
-};
+}
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
     // props компонента
   },
-};
-``` 
+}
+```

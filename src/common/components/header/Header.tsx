@@ -1,15 +1,15 @@
 import { useAppDispatch, useAppSelector } from "@/common/hooks"
 import { changeThemeModeAC, selectThemeMode } from "@/features/app-reducer"
-import {selectAppError, selectAppStatus} from "@/app/app-selectors"
-import {containerSx} from "@/common/styles"
-import {NavButton} from "@/common/components/button/NavButton"
+import { selectAppError, selectAppStatus } from "@/app/app-selectors"
+import { containerSx } from "@/common/styles"
+import { NavButton } from "@/common/components/button/NavButton"
 import MenuIcon from "@mui/icons-material/Menu"
 import AppBar from "@mui/material/AppBar"
 import Container from "@mui/material/Container"
 import IconButton from "@mui/material/IconButton"
 import Switch from "@mui/material/Switch"
 import Toolbar from "@mui/material/Toolbar"
-import {Alert, LinearProgress} from "@mui/material"
+import { Alert, LinearProgress } from "@mui/material"
 
 export const Header = () => {
   const status = useAppSelector(selectAppStatus)
@@ -18,9 +18,7 @@ export const Header = () => {
   const themeMode = useAppSelector(selectThemeMode)
 
   const changeMode = () => {
-    dispatch(
-      changeThemeModeAC({ themeMode: themeMode === "light" ? "dark" : "light" })
-    )
+    dispatch(changeThemeModeAC({ themeMode: themeMode === "light" ? "dark" : "light" }))
   }
 
   return (

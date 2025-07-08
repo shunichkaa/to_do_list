@@ -1,3 +1,3 @@
-export type FilterValues = 'all' | 'active' | 'completed'
+export type FilterValues = "all" | "active" | "completed"
 
-export type ThemeMode = 'dark' | 'light'
+export type ThemeMode = "dark" | "light"
