@@ -4,7 +4,8 @@ import Box from '@mui/material/Box'
 import { changeTodolistFilterAC } from '../features/todolists/todolistsSlice'
 import { useAppDispatch } from '../common/hooks/useAppDispatch'
 import { containerSx } from '../common/components/createItemForm/TodolistItem.styles'
-import { FilterValues, Todolist } from '../types'
+import { FilterValues } from '../types'
+import { Todolist } from '@/features/todolists/api/todolistsApi.types'
 
 type Props = {
     todolist: Todolist

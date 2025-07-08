@@ -1,7 +1,7 @@
 import React from 'react'
 import { deleteTodolistAC, changeTodolistTitleAC } from '../features/todolists/todolistsSlice'
 import { useAppDispatch } from '../common/hooks/useAppDispatch'
-import { EditableSpan } from '../common/components/editableSpan/EditableSpan'
+import { EditableSpan } from '@/common/components/editableSpan/EditableSpan'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { Todolist } from '../types'

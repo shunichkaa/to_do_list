@@ -1,11 +1,11 @@
 import { useAppDispatch, useAppSelector } from "@/common/hooks"
-import { CreateItemForm } from "@/common/components/CreateItemForm/CreateItemForm"
+import { CreateItemForm } from "@/common/components/createItemForm/CreateItemForm"
 import { addTodolistTC, fetchTodolistsTC } from "@/features/todolists/model/todolists-reducer"
 import { Todolists } from "@/features/todolists/ui/Todolists/Todolists"
 import { selectAppIsInitialized } from "@/app/app-selectors"
 import { setAppInitializedAC } from "@/app/app-reducer"
 import Container from "@mui/material/Container"
-import Grid from "@mui/material/Grid2"
+import Grid from "@mui/material/Grid"
 import { useEffect } from "react"
 import { CircularProgress, Box } from "@mui/material"
 

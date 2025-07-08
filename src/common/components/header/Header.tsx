@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/common/hooks"
 import { selectAppStatus, selectAppError } from "@/app/app-selectors"
 import { containerSx } from "@/common/styles"
-import { NavButton } from "@/common/components/navButton/navButton"
+import { NavButton } from "@/common/components/button/NavButton"
 import MenuIcon from "@mui/icons-material/Menu"
 import AppBar from "@mui/material/AppBar"
 import Container from "@mui/material/Container"

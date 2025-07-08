@@ -1,4 +1,4 @@
-import { EditableSpan } from "@/common/components/EditableSpan/EditableSpan"
+import { EditableSpan } from "@/common/components/editableSpan/EditableSpan"
 import { useAppDispatch } from "@/common/hooks"
 import { removeTaskTC, updateTaskTC } from "@/features/todolists/model/tasks-reducer"
 import { DomainTask } from "@/features/todolists/api/tasksApi.types"

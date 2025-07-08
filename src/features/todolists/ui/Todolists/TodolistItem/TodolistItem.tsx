@@ -4,7 +4,7 @@ import { addTaskTC, fetchTasksTC } from "@/features/todolists/model/tasks-reduce
 import type { Todolist } from "@/features/todolists/model/todolists-reducer"
 import { Tasks } from "./Tasks/Tasks"
 import { TodolistTitle } from "./TodolistTitle/TodolistTitle"
-import { CreateItemForm } from "@/common/components/CreateItemForm/CreateItemForm"
+import { CreateItemForm } from "@/common/components/createItemForm/CreateItemForm"
 import { useEffect } from "react"
 
 type Props = {
