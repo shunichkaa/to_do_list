@@ -1,45 +1,52 @@
-import { AddBox } from "@mui/icons-material";
-import { Box, IconButton, TextField } from "@mui/material";
-import { useState } from "react";
-import { getFormContainerSx, getTextFieldSx } from "./CreateItemForm.styles";
+import { type ChangeEvent, type KeyboardEvent, useState } from "react"
+import TextField from "@mui/material/TextField"
+import AddBoxIcon from "@mui/icons-material/AddBox"
+import IconButton from "@mui/material/IconButton"
 
-interface Props {
-    onCreateItem: (title: string) => void;
+type Props = {
+  onCreateItem: (title: string) => void
 }
 
 export const CreateItemForm = ({ onCreateItem }: Props) => {
-    const [title, setTitle] = useState('');
-    const [error, setError] = useState<string | null>(null);
+  const [title, setTitle] = useState("")
+  const [error, setError] = useState<string | null>(null)
 
-    const createItemHandler = () => {
-        const trimmedTitle = title.trim();
-        if (trimmedTitle) {
-            onCreateItem(trimmedTitle);
-            setTitle('');
-        } else {
-            setError('Title is required');
-        }
-    };
+  const createItemHandler = () => {
+    const trimmedTitle = title.trim()
+    if (trimmedTitle !== "") {
+      onCreateItem(trimmedTitle)
+      setTitle("")
+    } else {
+      setError("Title is required")
+    }
+  }
 
-    return (
-        <Box sx={getFormContainerSx()}>
-            <TextField
-                label="Enter a title"
-                variant="outlined"
-                value={title}
-                size="small"
-                error={!!error}
-                helperText={error}
-                sx={getTextFieldSx()}
-                onChange={e => {
-                    setTitle(e.currentTarget.value);
-                    setError(null);
-                }}
-                onKeyDown={e => e.key === 'Enter' && createItemHandler()}
-            />
-            <IconButton onClick={createItemHandler} color="primary">
-                <AddBox />
-            </IconButton>
-        </Box>
-    );
-};
+  const changeTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.currentTarget.value)
+    setError(null)
+  }
+
+  const createItemOnEnterHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      createItemHandler()
+    }
+  }
+
+  return (
+    <div>
+      <TextField
+        label={"Enter a title"}
+        variant={"outlined"}
+        value={title}
+        size={"small"}
+        error={!!error}
+        helperText={error}
+        onChange={changeTitleHandler}
+        onKeyDown={createItemOnEnterHandler}
+      />
+      <IconButton onClick={createItemHandler} color={"primary"}>
+        <AddBoxIcon />
+      </IconButton>
+    </div>
+  )
+}

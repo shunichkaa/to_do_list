@@ -1,66 +1,48 @@
-import {useAppSelector} from "../../hooks/useAppSelector";
-import {useAppDispatch} from "../../hooks/useAppDispatch";
-import {changeThemeModeAC, selectThemeMode} from "../../../features/app-reducer";
-import {containerSx} from "../createItemForm/TodolistItem.styles";
-import MenuIcon from "@mui/icons-material/Menu";
-import {ThemeMode} from "../../../types";
-import {AppBar, Box, Button, Container, IconButton, Switch, Toolbar} from "@mui/material";
-
-const headerSx = {mb: 3};
-const navigationContainerSx = {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 10,
-    marginLeft: 'auto'
-};
-
-interface NavigationMenuProps {
-    themeMode: ThemeMode;
-    onThemeChange: () => void;
-}
-
-const NavigationMenu = ({themeMode, onThemeChange}: NavigationMenuProps) => {
-    return (
-        <Box sx={navigationContainerSx}>
-            <Button color="inherit">Sign in</Button>
-            <Button color="inherit">Sign up</Button>
-            <Button color="inherit">FAQ</Button>
-            <Switch
-                checked={themeMode === 'dark'}
-                onChange={onThemeChange}
-                color="default"
-                inputProps={{'aria-label': 'toggle theme'}}
-            />
-        </Box>
-    );
-};
+import { useAppDispatch, useAppSelector } from "@/common/hooks"
+import { selectAppStatus, selectAppError } from "@/app/app-selectors"
+import { containerSx } from "@/common/styles"
+import { NavButton } from "@/common/components/NavButton/NavButton"
+import MenuIcon from "@mui/icons-material/Menu"
+import AppBar from "@mui/material/AppBar"
+import Container from "@mui/material/Container"
+import IconButton from "@mui/material/IconButton"
+import Switch from "@mui/material/Switch"
+import Toolbar from "@mui/material/Toolbar"
+import { LinearProgress, Alert } from "@mui/material"
 
 export const Header = () => {
-    const themeMode = useAppSelector(selectThemeMode);
-    const dispatch = useAppDispatch();
+  const status = useAppSelector(selectAppStatus)
+  const error = useAppSelector(selectAppError)
 
-    const handleThemeChange = () => {
-        dispatch(changeThemeModeAC({themeMode: themeMode === 'light' ? 'dark' : 'light'}));
-    };
+  const dispatch = useAppDispatch()
 
-    const handleMenuClick = () => {
-        console.log('Menu clicked');
-    };
+  const changeMode = () => {
+    // TODO: Implement theme switching
+  }
 
-    return (
-        <AppBar position="static" sx={headerSx}>
-            <Toolbar>
-                <Container maxWidth="lg" sx={containerSx}>
-                    <IconButton
-                        color="inherit"
-                        onClick={handleMenuClick}
-                        aria-label="menu"
-                    >
-                        <MenuIcon/>
-                    </IconButton>
-                    <NavigationMenu themeMode={themeMode} onThemeChange={handleThemeChange}/>
-                </Container>
-            </Toolbar>
-        </AppBar>
-    );
-};
+  return (
+    <AppBar position="static" sx={{ mb: "30px" }}>
+      <Toolbar>
+        <Container maxWidth={"lg"} sx={containerSx}>
+          <IconButton color="inherit">
+            <MenuIcon />
+          </IconButton>
+          <div>
+            <NavButton>Sign in</NavButton>
+            <NavButton>Sign up</NavButton>
+            <NavButton>Faq</NavButton>
+            <Switch color={"default"} onChange={changeMode} />
+          </div>
+        </Container>
+      </Toolbar>
+      <div>
+        {status === "loading" && <LinearProgress />}
+        {error && (
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {error}
+          </Alert>
+        )}
+      </div>
+    </AppBar>
+  )
+}
