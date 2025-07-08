@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@/common/hooks"
-import { containerSx } from "@/common/styles"
+import { containerSx } from "../../../../../common 2/styles"
 import { changeTodolistFilterAC, type FilterValues, type Todolist } from "@/features/todolists/model/todolists-reducer"
 import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"

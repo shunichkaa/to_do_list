@@ -1,10 +1,10 @@
 import "./App.css"
 import { CssBaseline, ThemeProvider } from "@mui/material"
-import { useAppSelector } from "../common/hooks/useAppSelector"
+import { useAppSelector } from "../common 2/hooks/useAppSelector"
 import { selectThemeMode } from "../features/app-reducer"
-import { getTheme } from "../common/theme/theme"
-import { Header } from "../common/components/header/Header"
-import { Main } from "../common/components/main/Main"
+import { getTheme } from "../common 2/theme/theme"
+import { Header } from "../common 2/components/header/Header"
+import { Main } from "../common 2/components/main/Main"
 
 export const App = () => {
   const themeMode = useAppSelector(selectThemeMode)
