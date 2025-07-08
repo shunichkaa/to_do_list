@@ -2,7 +2,7 @@ import React from "react"
 import Button from "@mui/material/Button"
 import Box from "@mui/material/Box"
 import { changeTodolistFilterAC } from "../../../todolists/todolistsSlice"
-import { useAppDispatch } from '../../../features/common/hooks/useAppDispatch'
+import { useAppDispatch } from '../../../common/hooks/useAppDispatch'
 import { FilterValues } from "../types"
 import { Todolist } from "@/features/todolists/api/todolistsApi.types"
 

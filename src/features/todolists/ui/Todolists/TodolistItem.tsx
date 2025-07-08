@@ -1,9 +1,9 @@
 import React from "react"
 import { Todolist } from "@/features/todolists/api/todolistsApi.types"
-import { useAppDispatch } from '../../../features/common/hooks/useAppDispatch'
+import { useAppDispatch } from '../../../common/hooks/useAppDispatch'
 import { createTaskAC } from "../../../tasks/tasksSlice"
 import { TodolistTitle } from "./TodolistTitle"
-import { CreateItemForm } from '../../../features/common/components/createItemForm/CreateItemForm'
+import { CreateItemForm } from '../../../common/components/createItemForm/CreateItemForm'
 import { Tasks } from "./Tasks"
 import { FilterButtons } from "./FilterButtons"
 

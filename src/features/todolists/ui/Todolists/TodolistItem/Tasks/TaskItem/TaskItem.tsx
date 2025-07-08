@@ -1,5 +1,5 @@
-import { EditableSpan } from '../../../../features/common/components/editableSpan/EditableSpan'
-import { useAppDispatch } from '../../../../../features/common/hooks/useAppDispatch'
+import { EditableSpan } from '../../../../../common/components/editableSpan/EditableSpan'
+import { useAppDispatch } from '../../../../../common/hooks/useAppDispatch'
 import { removeTaskTC, updateTaskTC } from "@/features/todolists/model/tasks-reducer"
 import { DomainTask } from "@/features/todolists/api/tasksApi.types"
 import { TaskStatus } from '../../../../../features/common/enums'

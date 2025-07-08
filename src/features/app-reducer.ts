@@ -1,27 +1,34 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { ThemeMode } from "../types"
-import { RootState } from "../features/store"
+import { createAction, createReducer } from "@reduxjs/toolkit"
 
-interface AppState {
-  themeMode: ThemeMode
+export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed"
+
+export type AppStateType = {
+  status: RequestStatusType
+  error: string | null
+  isInitialized: boolean
 }
 
-const initialState: AppState = {
-  themeMode: "light",
+const initialState: AppStateType = {
+  status: "idle",
+  error: null,
+  isInitialized: false,
 }
 
-const appSlice = createSlice({
-  name: "app",
-  initialState,
-  reducers: {
-    changeThemeModeAC(state, action: PayloadAction<{ themeMode: ThemeMode }>) {
-      state.themeMode = action.payload.themeMode
-    },
-  },
+export const appReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(setAppStatusAC, (state, action) => {
+      state.status = action.payload.status
+    })
+    .addCase(setAppErrorAC, (state, action) => {
+      state.error = action.payload.error
+    })
+    .addCase(setAppInitializedAC, (state, action) => {
+      state.isInitialized = action.payload.isInitialized
+    })
 })
 
-export const { changeThemeModeAC } = appSlice.actions
-export const appReducer = appSlice.reducer
+export const setAppStatusAC = createAction<{ status: RequestStatusType }>("app/setAppStatus")
+export const setAppErrorAC = createAction<{ error: string | null }>("app/setAppError")
+export const setAppInitializedAC = createAction<{ isInitialized: boolean }>("app/setAppInitialized")
 
-// Selector
-export const selectThemeMode = (state: RootState) => state.app.themeMode
+export { selectThemeMode } from './app-selectors.ts'
