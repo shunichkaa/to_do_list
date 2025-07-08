@@ -1,7 +1,9 @@
 import { createAction, createReducer, nanoid } from "@reduxjs/toolkit"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { createTodolistAC, deleteTodolistAC } from "./todolists-reducer"
-import { tasksApi, Task, TaskStatuses, UpdateTaskModel } from "../api/tasksApi"
+import { tasksApi } from "../api/tasksApi"
+import { DomainTask, UpdateTaskModel } from "../api/tasksApi.types"
+import { TaskStatus } from "@/common/enums"
 import { BaseResponse } from "@/common/types/types"
 import { setAppErrorAC, setAppStatusAC } from "@/app/app-reducer"
 
@@ -111,4 +113,4 @@ export const tasksReducer = createReducer(initialState, (builder) => {
     })
 })
 
-export type TasksState = Record<string, Task[]>
+export type TasksState = Record<string, DomainTask[]>

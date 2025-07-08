@@ -1,7 +1,8 @@
 import { EditableSpan } from "@/common/components/EditableSpan/EditableSpan"
 import { useAppDispatch } from "@/common/hooks"
 import { removeTaskTC, updateTaskTC } from "@/features/todolists/model/tasks-reducer"
-import { Task, TaskStatuses } from "@/features/todolists/api/tasksApi"
+import { DomainTask } from "@/features/todolists/api/tasksApi.types"
+import { TaskStatus } from "@/common/enums"
 import DeleteIcon from "@mui/icons-material/Delete"
 import Checkbox from "@mui/material/Checkbox"
 import IconButton from "@mui/material/IconButton"
@@ -10,7 +11,7 @@ import type { ChangeEvent } from "react"
 import { getListItemSx } from "./TaskItem.styles"
 
 type Props = {
-  task: Task
+  task: DomainTask
   todolistId: string
 }
 
@@ -26,7 +27,7 @@ export const TaskItem = ({ task, todolistId }: Props) => {
   }
 
   const changeTaskStatus = async (e: ChangeEvent<HTMLInputElement>) => {
-    const newStatusValue = e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New
+    const newStatusValue = e.currentTarget.checked ? TaskStatus.Completed : TaskStatus.New
     try {
       await dispatch(
         updateTaskTC({
@@ -69,9 +70,9 @@ export const TaskItem = ({ task, todolistId }: Props) => {
   }
 
   return (
-    <ListItem sx={getListItemSx(task.status === TaskStatuses.Completed)}>
+    <ListItem sx={getListItemSx(task.status === TaskStatus.Completed)}>
       <div>
-        <Checkbox checked={task.status === TaskStatuses.Completed} onChange={changeTaskStatus} />
+        <Checkbox checked={task.status === TaskStatus.Completed} onChange={changeTaskStatus} />
         <EditableSpan value={task.title} onChange={changeTaskTitle} />
       </div>
       <IconButton onClick={deleteTask}>

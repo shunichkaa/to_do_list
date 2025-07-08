@@ -8,7 +8,7 @@ import {
   type TasksState,
 } from "../tasks-reducer"
 import { createTodolistAC, deleteTodolistAC } from "../todolists-reducer"
-import { TaskStatuses } from "../../api/tasksApi"
+import { TaskStatus } from "@/common/enums"
 
 let startState: TasksState = {}
 
@@ -18,7 +18,7 @@ beforeEach(() => {
       {
         id: "1",
         title: "CSS",
-        status: TaskStatuses.New,
+        status: TaskStatus.New,
         description: "",
         todoListId: "",
         order: 0,
@@ -30,7 +30,7 @@ beforeEach(() => {
       {
         id: "2",
         title: "JS",
-        status: TaskStatuses.Completed,
+        status: TaskStatus.Completed,
         description: "",
         todoListId: "",
         order: 0,
@@ -42,7 +42,7 @@ beforeEach(() => {
       {
         id: "3",
         title: "React",
-        status: TaskStatuses.New,
+        status: TaskStatus.New,
         description: "",
         todoListId: "",
         order: 0,
@@ -56,7 +56,7 @@ beforeEach(() => {
       {
         id: "1",
         title: "bread",
-        status: TaskStatuses.New,
+        status: TaskStatus.New,
         description: "",
         todoListId: "",
         order: 0,
@@ -68,7 +68,7 @@ beforeEach(() => {
       {
         id: "2",
         title: "milk",
-        status: TaskStatuses.Completed,
+        status: TaskStatus.Completed,
         description: "",
         todoListId: "",
         order: 0,
@@ -80,7 +80,7 @@ beforeEach(() => {
       {
         id: "3",
         title: "tea",
-        status: TaskStatuses.New,
+        status: TaskStatus.New,
         description: "",
         todoListId: "",
         order: 0,
@@ -101,7 +101,7 @@ test("correct task should be deleted", () => {
       {
         id: "1",
         title: "CSS",
-        status: TaskStatuses.New,
+        status: TaskStatus.New,
         description: "",
         todoListId: "",
         order: 0,
@@ -113,7 +113,7 @@ test("correct task should be deleted", () => {
       {
         id: "2",
         title: "JS",
-        status: TaskStatuses.Completed,
+        status: TaskStatus.Completed,
         description: "",
         todoListId: "",
         order: 0,
@@ -125,7 +125,7 @@ test("correct task should be deleted", () => {
       {
         id: "3",
         title: "React",
-        status: TaskStatuses.New,
+        status: TaskStatus.New,
         description: "",
         todoListId: "",
         order: 0,
@@ -139,7 +139,7 @@ test("correct task should be deleted", () => {
       {
         id: "1",
         title: "bread",
-        status: TaskStatuses.New,
+        status: TaskStatus.New,
         description: "",
         todoListId: "",
         order: 0,
@@ -151,7 +151,7 @@ test("correct task should be deleted", () => {
       {
         id: "3",
         title: "tea",
-        status: TaskStatuses.New,
+        status: TaskStatus.New,
         description: "",
         todoListId: "",
         order: 0,
@@ -177,7 +177,7 @@ test("correct task should be created at correct array", () => {
   expect(endState.todolistId2.length).toBe(4)
   expect(endState.todolistId2[0].id).toBeDefined()
   expect(endState.todolistId2[0].title).toBe("juice")
-  expect(endState.todolistId2[0].status).toBe(TaskStatuses.New)
+  expect(endState.todolistId2[0].status).toBe(TaskStatus.New)
 })
 
 test("correct task should change its status", () => {
@@ -186,8 +186,8 @@ test("correct task should change its status", () => {
     changeTaskStatusAC({ todolistId: "todolistId2", taskId: "2", isDone: false }),
   )
 
-  expect(endState.todolistId2[1].status).toBe(TaskStatuses.New)
-  expect(endState.todolistId1[1].status).toBe(TaskStatuses.Completed)
+  expect(endState.todolistId2[1].status).toBe(TaskStatus.New)
+  expect(endState.todolistId1[1].status).toBe(TaskStatus.Completed)
 })
 
 test("correct task should change its title", () => {
