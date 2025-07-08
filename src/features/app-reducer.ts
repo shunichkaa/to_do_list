@@ -31,4 +31,4 @@ export const setAppStatusAC = createAction<{ status: RequestStatusType }>("app/s
 export const setAppErrorAC = createAction<{ error: string | null }>("app/setAppError")
 export const setAppInitializedAC = createAction<{ isInitialized: boolean }>("app/setAppInitialized")
 
-export { selectThemeMode } from './app-selectors.ts'
+export { selectThemeMode } from './app-selectors.ts  '
