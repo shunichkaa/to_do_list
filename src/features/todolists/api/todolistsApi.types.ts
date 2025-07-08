@@ -1,4 +1,4 @@
-import {BaseResponse} from "@/common/types/types.ts"
+import {BaseResponse} from "@/common/types/types"
 import {instance} from "@/common/instance"
 
 export type Todolist = {
