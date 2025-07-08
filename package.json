@@ -20,8 +20,6 @@
     "@mui/icons-material": "^7.1.2",
     "@mui/material": "^7.1.2",
     "@reduxjs/toolkit": "^2.8.2",
-    "@storybook/react-webpack5": "^9.0.14",
-    "@storybook/test": "^8.6.14",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@types/react": "^19.1.8",
@@ -36,10 +34,8 @@
     "web-vitals": "^5.0.3"
   },
   "devDependencies": {
-    "@storybook/cli": "^9.0.15",
-    "@storybook/react": "^9.0.15",
     "@vitejs/plugin-react-swc": "^3.10.2",
-    "typescript": "^5.8.3"
+    "typescript": "^4.9.5"
   },
   "browserslist": {
     "production": [
