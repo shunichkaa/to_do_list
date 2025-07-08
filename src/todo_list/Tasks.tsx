@@ -2,8 +2,9 @@ import React from 'react'
 import List from '@mui/material/List'
 import { useAppSelector } from '../common/hooks/useAppSelector'
 import { TaskItem } from './TaskItem'
-import { Todolist, Task } from '../types'
+import { Todolist } from '../types'
 import { RootState } from '../features/store'
+import { DomainTask } from '../features/todolists/api/tasksApi.types'
 
 type Props = {
     todolist: Todolist
@@ -16,13 +17,13 @@ export const Tasks = ({todolist}: Props) => {
 
     const tasks = useAppSelector(selectTasks)
 
-    const todolistTasks = tasks[id] || []
+    const todolistTasks: DomainTask[] = tasks[id] || []
     let filteredTasks = todolistTasks
     if (filter === 'active') {
-        filteredTasks = todolistTasks.filter((task: Task) => !task.isDone)
+        filteredTasks = todolistTasks.filter((task) => task.status !== 2)
     }
     if (filter === 'completed') {
-        filteredTasks = todolistTasks.filter((task: Task) => task.isDone)
+        filteredTasks = todolistTasks.filter((task) => task.status === 2)
     }
 
     return (
@@ -31,7 +32,7 @@ export const Tasks = ({todolist}: Props) => {
                 <p>Тасок нет</p>
             ) : (
                 <List>
-                    {filteredTasks.map((task: Task) => (
+                    {filteredTasks.map((task) => (
                         <TaskItem key={task.id} task={task} todolistId={id}/>
                     ))}
                 </List>

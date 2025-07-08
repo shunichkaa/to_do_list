@@ -6,6 +6,7 @@ import { instance } from "@/common/instance"
 import { Todolist, todolistsApi } from "@/features/todolists/api/todolistsApi.types.ts"
 import { tasksApi } from "@/features/todolists/api/tasksApi"
 import { DomainTask } from "@/features/todolists/api/tasksApi.types"
+import { TaskStatus } from "@/common/enums"
 
 export type FieldError = {
   error: string
@@ -76,7 +77,7 @@ export const AppHttpRequests = () => {
       priority: task.priority,
       startDate: task.startDate,
       deadline: task.deadline,
-      status: e.target.checked ? 2 : 0,
+      status: e.target.checked ? TaskStatus.Completed : TaskStatus.New,
     }
     tasksApi.updateTask({ todolistId, taskId: task.id, model }).then(() => {
       setTasks((prev) => ({
@@ -116,7 +117,7 @@ export const AppHttpRequests = () => {
           <CreateItemForm onCreateItem={(title) => createTask(todolist.id, title)} />
           {tasks[todolist.id]?.map((task: DomainTask) => (
             <div key={task.id}>
-              <Checkbox checked={task.status === 2} onChange={(e) => changeTaskStatus(e, task)} />
+              <Checkbox checked={task.status === TaskStatus.Completed} onChange={(e) => changeTaskStatus(e, task)} />
               <EditableSpan value={task.title} onChange={(title) => changeTaskTitle(task, title)} />
               <button onClick={() => deleteTask(todolist.id, task.id)}>x</button>
             </div>
