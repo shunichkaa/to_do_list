@@ -1,5 +1,5 @@
-import {instance} from "@/common/instance"
-import {BaseResponse} from "@/common/types/types"
+import { instance } from '../common/instance'
+import { BaseResponse } from '../common/types/types.ts'
 import {DomainTask, GetTasksResponse, UpdateTaskModel} from "./tasksApi.types"
 
 export const tasksApi = {

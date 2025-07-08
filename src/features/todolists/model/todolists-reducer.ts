@@ -1,7 +1,7 @@
 import { createAction, createReducer, nanoid } from "@reduxjs/toolkit"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { todolistsApi, Todolist as ApiTodolist } from "../api/todolistsApi.types"
-import { BaseResponse } from "@/common/types/types"
+import { BaseResponse } from '../../features/common/types/types'
 import { setAppErrorAC, setAppStatusAC } from "@/app/app-reducer"
 
 export type FilterValues = "all" | "active" | "completed"

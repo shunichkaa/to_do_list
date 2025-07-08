@@ -1,5 +1,5 @@
-import { useAppDispatch } from "@/common/hooks"
-import { EditableSpan } from "@/common/components/editableSpan/EditableSpan"
+import { useAppDispatch } from '../../../../features/common/hooks/useAppDispatch'
+import { EditableSpan } from '../../../../features/common/components/editableSpan/EditableSpan'
 import { changeTodolistTitleTC, removeTodolistTC, type Todolist } from "@/features/todolists/model/todolists-reducer"
 import DeleteIcon from "@mui/icons-material/Delete"
 import IconButton from "@mui/material/IconButton"

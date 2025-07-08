@@ -1,5 +1,6 @@
-import { useAppDispatch, useAppSelector } from "@/common/hooks"
-import { CreateItemForm } from "@/common/components/createItemForm/CreateItemForm"
+import { useAppDispatch } from "../features/common/hooks/useAppDispatch"
+import { useAppSelector } from "../features/common/hooks/useAppSelector"
+import { CreateItemForm } from "../features/common/components/createItemForm/CreateItemForm"
 import { addTodolistTC, fetchTodolistsTC } from "@/features/todolists/model/todolists-reducer"
 import { Todolists } from "@/features/todolists/ui/Todolists/Todolists"
 import { selectAppIsInitialized } from "@/app/app-selectors"

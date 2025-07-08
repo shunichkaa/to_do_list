@@ -1,12 +1,12 @@
 import { type ChangeEvent, type CSSProperties, useEffect, useState } from "react"
 import Checkbox from "@mui/material/Checkbox"
-import { CreateItemForm, EditableSpan } from "@/common/components/index"
-import { BaseResponse } from "@/common/types/types"
-import { instance } from "@/common/instance"
+import { CreateItemForm, EditableSpan } from "../features/common/components"
+import { BaseResponse } from "../features/common/types/types"
+import { instance } from "../features/common/instance"
 import { Todolist, todolistsApi } from "@/features/todolists/api/todolistsApi.types"
 import { tasksApi } from "@/features/todolists/api/tasksApi"
 import { DomainTask } from "@/features/todolists/api/tasksApi.types"
-import { TaskStatus } from "@/common/enums"
+import { TaskStatus } from "../features/common/enums"
 
 export type FieldError = {
   error: string

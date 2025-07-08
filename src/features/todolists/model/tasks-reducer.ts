@@ -3,8 +3,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit"
 import { createTodolistAC, deleteTodolistAC } from "./todolists-reducer"
 import { tasksApi } from "../api/tasksApi"
 import { DomainTask, UpdateTaskModel } from "../api/tasksApi.types"
-import { TaskStatus } from "@/common/enums"
-import { BaseResponse } from "@/common/types/types"
+import { TaskStatus } from '../../features/common/enums'
+import { BaseResponse } from '../../features/common/types/types'
 import { setAppErrorAC, setAppStatusAC } from "@/app/app-reducer"
 
 // Thunks
