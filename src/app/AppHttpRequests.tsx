@@ -23,7 +23,7 @@ export const AppHttpRequests = () => {
       setTodolists(todolists)
       todolists.forEach((todolist: Todolist) => {
         tasksApi.getTasks(todolist.id).then((res: { data: { items: DomainTask[] } }) => {
-          setTasks((prev) => ({ ...prev, [todolist.id]: res.data.items }))
+          setTasks(prev => ({ ...prev, [todolist.id]: res.data.items }))
         })
       })
     })
@@ -56,15 +56,15 @@ export const AppHttpRequests = () => {
   const createTask = (todolistId: string, title: string) => {
     tasksApi.createTask({ todolistId, title }).then((res: { data: { data: { item: DomainTask } } }) => {
       const newTask = res.data.data.item
-      setTasks((prev) => ({ ...prev, [todolistId]: [newTask, ...(prev[todolistId] || [])] }))
+      setTasks(prev => ({ ...prev, [todolistId]: [newTask, ...(prev[todolistId] || [])] }))
     })
   }
 
   const deleteTask = (todolistId: string, taskId: string) => {
     tasksApi.deleteTask({ todolistId, taskId }).then(() => {
-      setTasks((prev) => ({
+      setTasks(prev => ({
         ...prev,
-        [todolistId]: prev[todolistId].filter((t) => t.id !== taskId),
+        [todolistId]: prev[todolistId]?.filter((t) => t.id !== taskId) || [],
       }))
     })
   }
@@ -80,9 +80,9 @@ export const AppHttpRequests = () => {
       status: e.target.checked ? TaskStatus.Completed : TaskStatus.New,
     }
     tasksApi.updateTask({ todolistId, taskId: task.id, model }).then(() => {
-      setTasks((prev) => ({
+      setTasks(prev => ({
         ...prev,
-        [todolistId]: prev[todolistId].map((t) => (t.id === task.id ? { ...t, ...model } : t)),
+        [todolistId]: prev[todolistId]?.map((t) => (t.id === task.id ? { ...t, ...model } : t)) || [],
       }))
     })
   }
@@ -98,9 +98,9 @@ export const AppHttpRequests = () => {
       status: task.status,
     }
     tasksApi.updateTask({ todolistId, taskId: task.id, model }).then(() => {
-      setTasks((prev) => ({
+      setTasks(prev => ({
         ...prev,
-        [todolistId]: prev[todolistId].map((t) => (t.id === task.id ? { ...t, ...model } : t)),
+        [todolistId]: prev[todolistId]?.map((t) => (t.id === task.id ? { ...t, ...model } : t)) || [],
       }))
     })
   }
