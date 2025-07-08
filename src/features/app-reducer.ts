@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {ThemeMode} from '../types';
-import {RootState} from './store';
+import { RootState } from '../features/store';
 
 interface AppState {
     themeMode: ThemeMode;
