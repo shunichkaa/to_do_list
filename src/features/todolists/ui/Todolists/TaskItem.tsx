@@ -7,7 +7,7 @@ import { EditableSpan } from '../../../common/components/editableSpan/EditableSp
 import { useAppDispatch } from '../../../common/hooks/useAppDispatch'
 import { deleteTaskAC, changeTaskStatusAC, changeTaskTitleAC } from "../../../tasks/tasksSlice"
 import { getListItemSx } from "../../../todolists/ui/Todolists/TodolistItem/Tasks/TaskItem/TaskItem.styles"
-import { DomainTask } from "../features/todolists/api/tasksApi.types"
+import { DomainTask } from "@/features/todolists/api/tasksApi.types"
 
 type Props = {
   task: DomainTask

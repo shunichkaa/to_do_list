@@ -6,7 +6,7 @@ import DeleteIcon from "@mui/icons-material/Delete"
 import { EditableSpan } from "@/common/components/editableSpan/EditableSpan"
 import { useAppDispatch } from "../common/hooks/useAppDispatch"
 import { deleteTaskAC, changeTaskStatusAC, changeTaskTitleAC } from "../features/tasks/tasksSlice"
-import { getListItemSx } from "../common/components/createItemForm/TodolistItem.styles"
+import { getListItemSx } from "@/common/components/createItemForm/TodolistItem.styles"
 import { DomainTask } from "../features/todolists/api/tasksApi.types"
 
 type Props = {

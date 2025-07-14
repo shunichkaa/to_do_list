@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../../common/hooks/useAppDispatch'
 import { EditableSpan } from '../../../common/components/editableSpan/EditableSpan'
 import IconButton from "@mui/material/IconButton"
 import DeleteIcon from "@mui/icons-material/Delete"
-import { Todolist } from "../types"
+import { Todolist } from "../../todolists/api/todolistsApi.types"
 
 type Props = {
   todolist: Todolist

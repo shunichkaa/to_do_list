@@ -1,8 +1,8 @@
 import { EditableSpan } from '../../../../../common/components/editableSpan/EditableSpan'
 import { useAppDispatch } from '../../../../../common/hooks/useAppDispatch'
-import { removeTaskTC, updateTaskTC } from "@/features/todolists/model/tasks-reducer"
-import { DomainTask } from "@/features/todolists/api/tasksApi.types"
-import { TaskStatus } from '../../../../../features/common/enums'
+import { removeTaskTC, updateTaskTC } from '../../../../../todolists/model/tasks-reducer'
+import { DomainTask } from '../../../../../todolists/api/tasksApi.types'
+import { TaskStatus } from '../../../../../common/enums/enums'
 import DeleteIcon from "@mui/icons-material/Delete"
 import Checkbox from "@mui/material/Checkbox"
 import IconButton from "@mui/material/IconButton"

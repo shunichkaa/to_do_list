@@ -3,7 +3,7 @@ import Button from "@mui/material/Button"
 import Box from "@mui/material/Box"
 import { changeTodolistFilterAC } from "../../../todolists/todolistsSlice"
 import { useAppDispatch } from '../../../common/hooks/useAppDispatch'
-import { FilterValues } from "../types"
+import { FilterValues } from "@/features/todolists/model/todolists-reducer"
 import { Todolist } from "@/features/todolists/api/todolistsApi.types"
 
 type Props = {

@@ -2,7 +2,7 @@ import { useAppSelector } from '../../../../../common/hooks/useAppSelector'
 import { selectTasks } from "@/features/todolists/model/tasks-selectors"
 import type { Todolist } from "@/features/todolists/model/todolists-reducer"
 import { TaskItem } from "./TaskItem/TaskItem"
-import { TaskStatus } from '../../../../features/common/enums'
+import { TaskStatus } from '../../../../common/enums/enums'
 import List from "@mui/material/List"
 
 type Props = {

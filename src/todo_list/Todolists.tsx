@@ -3,8 +3,8 @@ import Grid from "@mui/material/Grid"
 import Paper from "@mui/material/Paper"
 import { TodolistItem } from "./TodolistItem"
 import { RootState } from "../features/store"
-import {Todolist, todolistsApi} from "@/features/todolists/api/todolistsApi.types";
-import {useAppSelector} from "@/common/hooks";
+import { Todolist, todolistsApi } from "../features/todolists/api/todolistsApi.types";
+import { useAppSelector } from "../common/hooks/useAppSelector";
 
 const selectTodolists = (state: RootState) => state.todolists
 

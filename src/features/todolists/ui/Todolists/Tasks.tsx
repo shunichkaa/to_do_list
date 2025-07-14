@@ -3,8 +3,8 @@ import List from "@mui/material/List"
 import { useAppSelector } from '../../../common/hooks/useAppSelector'
 import { TaskItem } from "./TaskItem"
 import { Todolist } from "@/features/todolists/api/todolistsApi.types"
-import { RootState } from "../features/store"
-import { DomainTask } from "../features/todolists/api/tasksApi.types"
+import { RootState } from "@/features/store"
+import { DomainTask } from "@/features/todolists/api/tasksApi.types"
 
 type Props = {
   todolist: Todolist

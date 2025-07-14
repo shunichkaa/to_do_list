@@ -1,4 +1,0 @@
-import { RootState } from '../model/store'
-import { ThemeMode } from '../model/app-reducer'
-
-export const selectThemeMode = (state: RootState): ThemeMode => state.app.themeMode

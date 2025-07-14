@@ -1,7 +1,7 @@
 
 import {FilterValues} from "@/types";
 import {BaseResponse} from "@/common/types/types";
-import {instance} from "@/common/instance";
+import { instance } from '@/common/instance/instance'
 
 export type Todolist = {
     id: string
