@@ -1,6 +1,6 @@
 import React from "react"
 import { Container, Grid } from "@mui/material"
-import { CreateItemForm } from "@/common/components/createItemForm/CreateItemForm"
+import { CreateItemForm } from "@/common/components/createItemForm/CreateItemForm.tsx"
 import { Todolists } from "../../../todo_list/Todolists"
 import { useAppDispatch } from "../../hooks/useAppDispatch"
 import { createTodolistAC } from "../../../features/todolists/todolistsSlice"
