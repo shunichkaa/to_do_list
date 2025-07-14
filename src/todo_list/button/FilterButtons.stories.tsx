@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-webpack5"
 import { Provider } from "react-redux"
-import { store } from "../features/store"
+import { store } from "../../features/store"
 import { FilterButtons } from "./FilterButtons"
-import { Todolist } from "../types"
+import { Todolist } from "../../types"
 
 const meta: Meta<typeof FilterButtons> = {
   title: "TodoList/FilterButtons",

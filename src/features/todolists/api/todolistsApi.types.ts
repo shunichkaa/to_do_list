@@ -1,11 +1,14 @@
-import { BaseResponse } from '../common/types/types'
-import { instance } from '../common/instance'
+
+import {FilterValues} from "@/types";
+import {BaseResponse} from "@/common/types/types";
+import {instance} from "@/common/instance";
 
 export type Todolist = {
     id: string
     title: string
     addedDate: string
     order: number
+    filter: FilterValues
 }
 
 export const todolistsApi = {

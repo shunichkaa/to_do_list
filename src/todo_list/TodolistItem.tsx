@@ -5,7 +5,7 @@ import { createTaskAC } from "../features/tasks/tasksSlice"
 import { TodolistTitle } from "./TodolistTitle"
 import { CreateItemForm } from "@/common/components/createItemForm/CreateItemForm"
 import { Tasks } from "./Tasks"
-import { FilterButtons } from "./FilterButtons"
+import { FilterButtons } from "./button/FilterButtons"
 
 type Props = {
   todolist: Todolist
