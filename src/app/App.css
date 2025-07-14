@@ -1,0 +1,40 @@
+
+.App > div {
+    margin: 50px;
+}
+
+.error {
+    border: #c45c5c 1px solid;
+}
+
+.error-message {
+    color: #c45c5c;
+}
+
+.active-filter {
+    background-color: rgba(160, 251, 63, 0.43);
+}
+
+.is-done {
+    opacity: 0.5;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.is-done {
+    opacity: 0.5;
+}
